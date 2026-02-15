@@ -1,0 +1,753 @@
+// Variables
+$primary: #2d7708;
+$background-light: #f6f8f6;
+$background-dark: #162210;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-300: #cbd5e1;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+$slate-600: #475569;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$slate-900: #0f172a;
+$slate-950: rgba(2, 6, 23, 0.4);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @media (min-width: 1024px) {
+    padding: 0 3rem;
+  }
+}
+
+// Base Container
+.container {
+  background-color: $background-light;
+  color: $slate-900;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Header Styles
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid $slate-200;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.headerInner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  height: 5rem;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (min-width: 1024px) {
+    padding: 0 3rem;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  width: 2rem;
+  height: 2rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: $slate-900;
+  margin: 0;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 2.5rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $slate-600;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.activeLink {
+  color: $primary !important;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quoteBtn {
+  background-color: $primary;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba($primary, 0.2);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// Hero Section
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
+  z-index: 10;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 20;
+  @include container;
+  width: 100%;
+}
+
+.heroInner {
+  max-width: 42rem;
+}
+
+.heroBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $primary;
+  background-color: rgba($primary, 0.1);
+  border: 1px solid rgba($primary, 0.2);
+  border-radius: 9999px;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 4.5rem;
+  }
+}
+
+.heroTitleAccent {
+  color: $primary;
+}
+
+.heroDescription {
+  font-size: 1.25rem;
+  color: $slate-300;
+  line-height: 1.625;
+  margin-bottom: 2rem;
+  max-width: 32rem;
+}
+
+.heroButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: $primary;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 1rem 2.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 20px 25px -5px rgba($primary, 0.3);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+}
+
+// Company Story Section
+.storySection {
+  padding: 6rem 0;
+  background-color: white;
+}
+
+.storySectionInner {
+  @include container;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.storyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.storyTextContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.storyTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $slate-900;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  border-left: 4px solid $primary;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.storyParagraph {
+  font-size: 1.125rem;
+  color: $slate-600;
+  line-height: 1.625;
+  margin: 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-top: 1rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $primary;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: $slate-500;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.storyImageWrapper {
+  position: relative;
+
+  &:hover .storyImageBackground {
+    background-color: rgba($primary, 0.2);
+  }
+}
+
+.storyImageBackground {
+  position: absolute;
+  inset: -1rem;
+  background-color: rgba($primary, 0.1);
+  border-radius: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.storyImageContainer {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  height: 450px;
+}
+
+.storyImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+// Vision & Mission Section
+.visionMissionSection {
+  padding: 6rem 0;
+  background-color: $background-light;
+}
+
+.visionMissionInner {
+  @include container;
+}
+
+.visionMissionGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.visionMissionCard {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba($primary, 0.2);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $primary;
+
+    .visionMissionIcon {
+      background-color: $primary;
+      color: white;
+    }
+  }
+}
+
+.visionMissionIcon {
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba($primary, 0.1);
+  color: $primary;
+  border-radius: 9999px;
+  @include flex-center;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s;
+
+  .material-symbols-outlined {
+    font-size: 2rem;
+  }
+}
+
+.visionMissionTitle {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: $slate-900;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+.visionMissionDescription {
+  font-size: 1.125rem;
+  color: $slate-600;
+  line-height: 1.625;
+  margin: 0;
+}
+
+// Core Values Section
+.valuesSection {
+  padding: 6rem 0;
+  background-color: white;
+}
+
+.valuesSectionInner {
+  @include container;
+}
+
+.valuesHeader {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto 4rem;
+}
+
+.valuesTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $slate-900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+}
+
+.valuesDivider {
+  height: 0.25rem;
+  width: 5rem;
+  background-color: $primary;
+  margin: 0 auto 1.5rem;
+}
+
+.valuesSubtitle {
+  color: $slate-600;
+  margin: 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.valueItem {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.valueIcon {
+  color: $primary;
+  margin-bottom: 1.5rem;
+
+  .material-symbols-outlined {
+    font-size: 3.75rem;
+  }
+}
+
+.valueTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $slate-900;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.valueDescription {
+  color: $slate-600;
+  line-height: 1.625;
+  margin: 0;
+}
+
+// Certifications Section
+.certificationsSection {
+  padding: 5rem 0;
+  background-color: $background-light;
+  border-top: 1px solid $slate-200;
+}
+
+.certificationsSectionInner {
+  @include container;
+}
+
+.certificationsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.certificationsText {
+  max-width: 24rem;
+}
+
+.certificationsTitle {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: $slate-900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+.certificationsDescription {
+  font-size: 0.875rem;
+  color: $slate-500;
+  margin: 0;
+}
+
+.certificationsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  opacity: 0.6;
+  filter: grayscale(1);
+  transition: all 0.5s;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+}
+
+.certificationItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  .material-symbols-outlined {
+    font-size: 3rem;
+    color: $primary;
+  }
+}
+
+.certificationLabel {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $slate-600;
+}
+
+// Footer
+.footer {
+  background-color: $background-dark;
+  color: white;
+  padding: 5rem 0;
+}
+
+.footerInner {
+  @include container;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footerLogoIcon {
+  width: 2rem;
+  height: 2rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.footerLogoText {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+.footerBrandDescription {
+  color: $slate-400;
+  max-width: 24rem;
+  line-height: 1.625;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLink {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.05);
+  @include flex-center;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.2s;
+
+  .material-symbols-outlined {
+    font-size: 0.875rem;
+  }
+
+  &:hover {
+    background-color: $primary;
+  }
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerColumnTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li a {
+    font-size: 0.875rem;
+    color: $slate-400;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.footerContactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: $slate-400;
+
+    .material-symbols-outlined {
+      font-size: 1.125rem;
+      color: $primary;
+    }
+  }
+}
+
+.footerBottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: $slate-500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.footerLegal {
+  display: flex;
+  gap: 2rem;
+
+  a {
+    color: $slate-500;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: white;
+    }
+  }
+}

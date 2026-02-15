@@ -1,0 +1,492 @@
+// Variables
+$primary: #2d7708;
+$background-light: #f6f8f6;
+$background-dark: #162210;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-300: #cbd5e1;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+$slate-600: #475569;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$slate-900: #0f172a;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 0 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 10rem;
+  }
+}
+
+// Base Container
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: $background-light;
+  font-family: 'Inter', sans-serif;
+  color: $slate-900;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Header Styles
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid rgba($primary, 0.1);
+  background-color: rgba($background-light, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    padding: 1rem 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 1rem 10rem;
+  }
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  width: 2rem;
+  height: 2rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: $slate-900;
+  margin: 0;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 2.5rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $slate-600;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.activeLink {
+  color: $primary !important;
+}
+
+.quoteBtn {
+  background-color: $primary;
+  color: white;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// Main Content
+.main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 4rem 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 6rem 1.5rem;
+  }
+}
+
+// Hero Section
+.heroSection {
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto 5rem;
+}
+
+.heroBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $primary;
+  background-color: rgba($primary, 0.1);
+  border-radius: 9999px;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: $slate-900;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 3.75rem;
+  }
+}
+
+.heroDescription {
+  font-size: 1.125rem;
+  color: $slate-600;
+  line-height: 1.625;
+  margin: 0;
+}
+
+// Logo Grid
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 6rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.logoGridItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: white;
+  border: 1px solid $slate-100;
+  border-radius: 0.75rem;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+
+  &:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.logoImage {
+  width: 100%;
+  height: 3rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+// Stats Section
+.statsSection {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 6rem;
+  padding: 4rem 0;
+  border-top: 1px solid rgba($primary, 0.1);
+  border-bottom: 1px solid rgba($primary, 0.1);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValue {
+  font-size: 3rem;
+  font-weight: 900;
+  color: $primary;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $slate-500;
+}
+
+// CTA Section
+.ctaSection {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background-color: $primary;
+  padding: 5rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.ctaBackground {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background: radial-gradient(circle at center, white, transparent, transparent);
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 10;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+.ctaDescription {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.625;
+  margin-bottom: 2.5rem;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+}
+
+.ctaPrimaryBtn {
+  background-color: white;
+  color: $primary;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $slate-100;
+  }
+}
+
+.ctaSecondaryBtn {
+  background-color: transparent;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: white;
+  }
+}
+
+// Footer
+.footer {
+  background-color: white;
+  border-top: 1px solid $slate-100;
+  padding: 3rem 1.5rem;
+}
+
+.footerGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.footerBrand {
+  grid-column: span 1;
+
+  @media (min-width: 768px) {
+    grid-column: span 2;
+  }
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.footerLogoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.footerLogoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $slate-900;
+}
+
+.footerBrandDescription {
+  color: $slate-500;
+  max-width: 24rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLink {
+  color: $slate-400;
+  transition: color 0.2s;
+  text-decoration: none;
+
+  .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerColumnTitle {
+  font-weight: 700;
+  color: $slate-900;
+  margin-bottom: 1.5rem;
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li a {
+    font-size: 0.875rem;
+    color: $slate-500;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.footerContactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li {
+    font-size: 0.875rem;
+    color: $slate-500;
+  }
+}
+
+.footerBottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid $slate-100;
+  text-align: center;
+  font-size: 0.75rem;
+  color: $slate-400;
+}

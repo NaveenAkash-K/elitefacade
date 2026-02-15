@@ -1,0 +1,886 @@
+// Variables
+$primary: #2d7708;
+$background-light: #f6f8f6;
+$background-dark: #162210;
+$text-primary: #0f172a;
+$text-secondary: #64748b;
+$text-muted: #94a3b8;
+$border-light: #e2e8f0;
+$border-dark: #334155;
+$white: #ffffff;
+$slate-50: #f8fafc;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-300: #cbd5e1;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+$slate-600: #475569;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$slate-900: #0f172a;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin container-padding {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  @media (min-width: 1024px) {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+}
+
+// Base Container
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: $background-light;
+  font-family: 'Inter', sans-serif;
+  color: $text-primary;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+// Header Styles
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  border-bottom: 1px solid $border-light;
+  @include container-padding;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: rgba($white, 0.8);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: $text-primary;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 2.25rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text-secondary;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.activeLink {
+  color: $primary !important;
+  font-weight: 700 !important;
+}
+
+.quoteBtn {
+  display: flex;
+  min-width: 7.5rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  height: 2.5rem;
+  padding: 0 1.25rem;
+  background-color: $primary;
+  color: $white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  border: none;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// Main Content
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// Hero Section
+.heroSection {
+  width: 100%;
+  max-width: 75rem;
+  padding: 3rem 1.5rem;
+
+  @media (min-width: 1024px) {
+    padding: 5rem 2.5rem;
+  }
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background-color: rgba($primary, 0.1);
+  color: $primary;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+
+.badgeDot {
+  position: relative;
+  display: flex;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.badgePing {
+  position: absolute;
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 9999px;
+  background-color: $primary;
+  opacity: 0.75;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.badgeDotInner {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: $primary;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: $text-primary;
+  margin: 0;
+
+  @media (min-width: 1024px) {
+    font-size: 3.75rem;
+  }
+}
+
+.heroDescription {
+  font-size: 1.125rem;
+  color: $text-secondary;
+  line-height: 1.625;
+  max-width: 36rem;
+  margin: 0;
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.primaryBtn {
+  background-color: $primary;
+  color: $white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 10px 15px -3px rgba($primary, 0.2);
+  }
+}
+
+.secondaryBtn {
+  border: 1px solid $slate-300;
+  color: $slate-700;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $slate-50;
+  }
+}
+
+.heroImageWrapper {
+  position: relative;
+}
+
+.heroImageGlow {
+  position: absolute;
+  inset: -0.25rem;
+  background: linear-gradient(to right, $primary, #059669);
+  border-radius: 0.75rem;
+  filter: blur(4px);
+  opacity: 0.25;
+  transition: opacity 1s;
+}
+
+.heroImageWrapper:hover .heroImageGlow {
+  opacity: 0.4;
+}
+
+.heroImage {
+  position: relative;
+  background-color: $slate-200;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background-size: cover;
+  background-position: center;
+}
+
+// Regions Section
+.regionsSection {
+  width: 100%;
+  background-color: $white;
+  padding: 5rem 0;
+}
+
+.regionsContent {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.regionsSectionHeader {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: $text-primary;
+  margin: 0 0 1rem;
+}
+
+.sectionDescription {
+  color: $slate-500;
+  max-width: 42rem;
+  margin: 0;
+}
+
+.regionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.regionCard {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid $border-light;
+  background-color: $background-light;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: rgba($primary, 0.5);
+
+    .material-symbols-outlined {
+      transform: scale(1.1);
+    }
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.875rem;
+    color: $primary;
+    margin-bottom: 1rem;
+    transition: transform 0.2s;
+  }
+}
+
+.regionTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 0.5rem;
+}
+
+.regionDescription {
+  font-size: 0.875rem;
+  color: $slate-500;
+  line-height: 1.625;
+  margin: 0;
+}
+
+// Solutions Section
+.solutionsSection {
+  width: 100%;
+  max-width: 75rem;
+  padding: 5rem 1.5rem;
+}
+
+.solutionsSectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.solutionsSectionTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $text-primary;
+  margin: 0 0 1rem;
+
+  @media (min-width: 1024px) {
+    font-size: 2.25rem;
+  }
+}
+
+.sectionDivider {
+  width: 5rem;
+  height: 0.375rem;
+  background-color: $primary;
+  margin: 0 auto;
+  border-radius: 9999px;
+}
+
+.solutionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.solutionCard {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid $slate-100;
+}
+
+.solutionImage {
+  height: 12rem;
+  background-color: $slate-200;
+  background-size: cover;
+  background-position: center;
+}
+
+.solutionContent {
+  padding: 2rem;
+}
+
+.phaseLabel {
+  color: $primary;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.solutionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 1rem;
+}
+
+.solutionDescription {
+  font-size: 0.875rem;
+  color: $slate-500;
+  line-height: 1.625;
+  margin: 0 0 1.5rem;
+}
+
+.solutionFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: $text-secondary;
+
+    .material-symbols-outlined {
+      font-size: 1.125rem;
+      color: $primary;
+    }
+  }
+}
+
+.solutionLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $primary;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 0.2s;
+
+  &:hover {
+    gap: 1rem;
+  }
+}
+
+// Process Section
+.processSection {
+  width: 100%;
+  background-color: $slate-900;
+  padding: 6rem 0;
+  overflow: hidden;
+}
+
+.processContent {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.processTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $white;
+  text-align: center;
+  margin: 0 0 4rem;
+}
+
+.processTimeline {
+  position: relative;
+}
+
+.timelineLine {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  background-color: $slate-800;
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
+
+.timelineProgress {
+  height: 100%;
+  background-color: $primary;
+  width: 60%;
+}
+
+.processSteps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  position: relative;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.processStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.stepNumber {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  @include flex-center;
+  font-weight: 900;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 10;
+  border: 4px solid $slate-900;
+}
+
+.stepActive {
+  background-color: $primary;
+  color: $white;
+}
+
+.stepInactive {
+  background-color: $slate-800;
+  color: $slate-500;
+}
+
+.stepTitle {
+  font-weight: 700;
+  color: $white;
+  margin: 0 0 0.75rem;
+}
+
+.stepDescription {
+  font-size: 0.875rem;
+  color: $slate-400;
+  margin: 0;
+}
+
+// Why Choose Section
+.whyChooseSection {
+  width: 100%;
+  max-width: 75rem;
+  padding: 6rem 1.5rem;
+}
+
+.whyChooseGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5rem;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.whyChooseTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $text-primary;
+  line-height: 1.2;
+  margin: 0 0 2rem;
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.featureItem {
+  display: flex;
+  gap: 1rem;
+}
+
+.featureIcon {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: rgba($primary, 0.1);
+  @include flex-center;
+  color: $primary;
+}
+
+.featureTitle {
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 0.25rem;
+}
+
+.featureDescription {
+  font-size: 0.875rem;
+  color: $slate-500;
+  margin: 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.statsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &:first-child {
+    padding-top: 3rem;
+  }
+}
+
+.statCard {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: $slate-100;
+}
+
+.statPrimary {
+  background-color: $primary;
+  color: $white;
+
+  .statValue {
+    color: $white;
+  }
+
+  .statLabel {
+    opacity: 0.8;
+  }
+}
+
+.statHighlight {
+  background-color: rgba($primary, 0.1);
+  border: 1px solid rgba($primary, 0.2);
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 0.25rem;
+  color: $text-primary;
+}
+
+.statValuePrimary {
+  color: $primary;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $slate-500;
+}
+
+// CTA Section
+.ctaSection {
+  width: 100%;
+  background-color: rgba($primary, 0.05);
+  padding: 5rem 1.5rem;
+}
+
+.ctaContent {
+  max-width: 50rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $text-primary;
+  margin: 0 0 1.5rem;
+}
+
+.ctaDescription {
+  font-size: 1.125rem;
+  color: $text-secondary;
+  margin: 0 0 2.5rem;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+}
+
+.ctaPrimaryBtn {
+  background-color: $primary;
+  color: $white;
+  padding: 1rem 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+.ctaSecondaryBtn {
+  background-color: $white;
+  color: $text-primary;
+  border: 1px solid $border-light;
+  padding: 1rem 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $slate-100;
+  }
+}
+
+// Footer
+.footer {
+  background-color: $white;
+  border-top: 1px solid $border-light;
+  @include container-padding;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  span {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: $text-primary;
+  }
+}
+
+.footerLogoIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.footerCopyright {
+  font-size: 0.875rem;
+  color: $slate-500;
+}
+
+.footerSocial {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    color: $slate-400;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}

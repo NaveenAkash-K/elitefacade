@@ -1,0 +1,583 @@
+// Variables
+$primary: #2d7708;
+$background-light: #f6f8f6;
+$background-dark: #162210;
+$text-dark: #121c0d;
+$text-light: #f9fcf8;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$slate-900: #0f172a;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 0 4rem;
+  }
+}
+
+// Base Container
+.container {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: $background-light;
+  font-family: 'Inter', sans-serif;
+  color: $slate-900;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Header Styles
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid $slate-200;
+  background-color: rgba($background-light, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 1rem 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 1rem 4rem;
+  }
+}
+
+.headerInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.logoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: $slate-900;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $slate-900;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.activeLink {
+  color: $primary !important;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.searchBox {
+  position: relative;
+  display: none;
+  width: 16rem;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
+
+  .material-symbols-outlined {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $slate-400;
+    font-size: 1.25rem;
+  }
+
+  input {
+    width: 100%;
+    background-color: $slate-100;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    font-size: 0.875rem;
+    outline: none;
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba($primary, 0.2);
+    }
+  }
+}
+
+.quoteBtn {
+  background-color: $primary;
+  color: white;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// Main Content
+.main {
+  flex: 1;
+  width: 100%;
+  @include container;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+// Hero Header
+.heroHeader {
+  margin-bottom: 3rem;
+}
+
+.pageTitle {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    font-size: 3.75rem;
+  }
+}
+
+.pageDescription {
+  font-size: 1.125rem;
+  color: $slate-500;
+  max-width: 42rem;
+  line-height: 1.625;
+}
+
+// Filters Section
+.filtersSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid $slate-200;
+  padding-bottom: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.filterTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterTab,
+.filterTabActive {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filterTab {
+  background-color: $slate-100;
+  color: $slate-900;
+
+  &:hover {
+    background-color: $slate-200;
+  }
+}
+
+.filterTabActive {
+  background-color: $primary;
+  color: white;
+}
+
+.sortBy {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $slate-500;
+}
+
+.sortLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sortSelect {
+  background: transparent;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Masonry Grid
+.masonryGrid {
+  column-count: 1;
+  column-gap: 1.5rem;
+
+  @media (min-width: 640px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 1024px) {
+    column-count: 3;
+  }
+}
+
+.projectCard {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: $slate-200;
+  cursor: pointer;
+
+  &:hover {
+    .projectImage {
+      filter: grayscale(0);
+    }
+
+    .projectOverlay {
+      opacity: 1;
+    }
+  }
+}
+
+.projectImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.7s;
+}
+
+.projectOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2) 50%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+
+.projectCategory {
+  color: $primary;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.projectTitle {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.projectLocation {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .material-symbols-outlined {
+    font-size: 1rem;
+  }
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  gap: 1rem;
+}
+
+.paginationArrow {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid $slate-200;
+  background: transparent;
+  @include flex-center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $slate-100;
+  }
+}
+
+.paginationNumbers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginationNumber,
+.paginationActive {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.paginationNumber {
+  background: transparent;
+
+  &:hover {
+    background-color: $slate-100;
+  }
+}
+
+.paginationActive {
+  background-color: $primary;
+  color: white;
+}
+
+.paginationEllipsis {
+  padding: 0 0.5rem;
+}
+
+// Footer
+.footer {
+  margin-top: 6rem;
+  background-color: $slate-900;
+  color: white;
+  padding: 4rem 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 4rem;
+  }
+}
+
+.footerGrid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.footerBrand {
+  grid-column: span 1;
+
+  @media (min-width: 768px) {
+    grid-column: span 1;
+  }
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.footerLogoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.footerLogoText {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.footerBrandDescription {
+  color: $slate-400;
+  max-width: 24rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLink {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid $slate-700;
+  @include flex-center;
+  transition: all 0.2s;
+  color: white;
+  text-decoration: none;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+
+  &:hover {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+
+.footerColumn {
+  h4 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.footerColumnTitle {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li a {
+    color: $slate-400;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.footerBottom {
+  max-width: 1440px;
+  margin: 0 auto;
+  border-top: 1px solid $slate-800;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: $slate-500;
+  font-weight: 500;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.footerLegal {
+  display: flex;
+  gap: 2rem;
+
+  a {
+    color: $slate-500;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: white;
+    }
+  }
+}

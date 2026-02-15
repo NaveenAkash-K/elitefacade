@@ -1,0 +1,681 @@
+// Variables
+$primary: #2d7708;
+$background-light: #f6f8f6;
+$background-dark: #162210;
+$text-dark: #121c0d;
+$text-light: #f9fcf8;
+$border-light: #ebf3e7;
+$border-dark: #2d3a24;
+$card-dark: #1f2e1a;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// Base Container
+.container {
+  background-color: $background-light;
+  color: $text-dark;
+  font-family: 'Inter', sans-serif;
+  transition: colors 0.3s;
+}
+
+// Header Styles
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid $border-light;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.headerInner {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: $primary;
+}
+
+.logoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logoText {
+  color: $text-dark;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: none;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contactBtn {
+  @include flex-center;
+  min-width: 120px;
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  background-color: $primary;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba($primary, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// Hero Section
+.hero {
+  position: relative;
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.heroContent {
+  @include container;
+  position: relative;
+  width: 100%;
+}
+
+.heroTextWrapper {
+  max-width: 48rem;
+}
+
+.heroBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba($primary, 0.2);
+  border: 1px solid $primary;
+  color: $primary;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.heroTitle {
+  color: white;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.025em;
+
+  @media (min-width: 768px) {
+    font-size: 4.5rem;
+  }
+}
+
+.highlight {
+  color: $primary;
+}
+
+.heroDescription {
+  color: #e5e7eb;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.625;
+  margin-bottom: 2.5rem;
+  max-width: 42rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.primaryBtn {
+  @include flex-center;
+  min-width: 180px;
+  height: 3.5rem;
+  padding: 0 2rem;
+  background-color: $primary;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 50px -12px rgba($primary, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.secondaryBtn {
+  @include flex-center;
+  min-width: 180px;
+  height: 3.5rem;
+  padding: 0 2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+// Stats Section
+.stats {
+  padding: 3rem 0;
+  background-color: white;
+  border-bottom: 1px solid $border-light;
+}
+
+.statsInner {
+  @include container;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  background-color: $background-light;
+  border: 1px solid #d7e8cf;
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: $primary;
+  margin-bottom: 0.5rem;
+
+  .material-symbols-outlined {
+    font-size: 1.875rem;
+  }
+}
+
+.statLabel {
+  color: $text-dark;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.statValue {
+  color: $primary;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+// Expertise Section
+.expertise {
+  padding: 6rem 0;
+  background-color: $background-light;
+}
+
+.expertiseInner {
+  @include container;
+}
+
+.expertiseHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.sectionSubtitle {
+  color: $primary;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.sectionTitle {
+  color: $text-dark;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.exploreLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $primary;
+  font-weight: 700;
+  transition: gap 0.2s;
+
+  &:hover {
+    gap: 0.75rem;
+  }
+}
+
+.expertiseGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.expertiseCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $primary;
+
+    .expertiseTitle {
+      color: $primary;
+    }
+  }
+}
+
+.expertiseImage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.expertiseContent {
+  padding: 0 0.5rem 0.5rem;
+}
+
+.expertiseTitle {
+  color: $text-dark;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s;
+}
+
+.expertiseDescription {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  margin-bottom: 1rem;
+}
+
+.expertiseTag {
+  color: $primary;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+// Clients Section
+.clients {
+  padding: 4rem 0;
+  background-color: white;
+}
+
+.clientsInner {
+  @include container;
+}
+
+.clientsTitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2.5rem;
+}
+
+.clientsLogos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  opacity: 0.5;
+  filter: grayscale(1);
+  transition: all 0.7s;
+
+  @media (min-width: 768px) {
+    gap: 5rem;
+  }
+
+  &:hover {
+    filter: grayscale(0);
+  }
+
+  img {
+    height: 2rem;
+  }
+}
+
+// CTA Section
+.cta {
+  padding: 6rem 1.5rem;
+}
+
+.ctaCard {
+  @include container;
+  background-color: $primary;
+  border-radius: 2rem;
+  padding: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: 5rem;
+  }
+}
+
+.ctaOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 10;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  color: white;
+  font-size: 2.25rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+  line-height: 1.25;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+.ctaDescription {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.125rem;
+  margin-bottom: 2.5rem;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+}
+
+.ctaPrimaryBtn {
+  background-color: white;
+  color: $primary;
+  padding: 1rem 2.5rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 800;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
+}
+
+.ctaSecondaryBtn {
+  background-color: $primary;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.8);
+  }
+}
+
+// Footer
+.footer {
+  background-color: $background-dark;
+  color: #9ca3af;
+  padding: 4rem 0;
+}
+
+.footerGrid {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.footerBrand {
+  grid-column: span 1;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.footerLogoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.footerLogoText {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+.footerBrandDescription {
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.footerColumn {
+  h4 {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.footerColumnTitle {
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li a {
+    font-size: 0.875rem;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.footerContact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+
+    .material-symbols-outlined {
+      color: $primary;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.footerBottom {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.footerLegal {
+  display: flex;
+  gap: 2rem;
+
+  a {
+    transition: color 0.2s;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
