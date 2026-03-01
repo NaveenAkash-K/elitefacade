@@ -5,36 +5,6 @@ import Link from "next/link";
 export default function ProjectsPage() {
   return (
     <div className={styles.container}>
-      {/* Navigation */}
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <div className={styles.headerLeft}>
-            <Link href="/frontend/public" className={styles.logo}>
-              <div className={styles.logoIcon}>
-                <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                  <path clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fillRule="evenodd" />
-                </svg>
-              </div>
-              <span className={styles.logoText}>HG Walls</span>
-            </Link>
-            <nav className={styles.nav}>
-              <Link href="/frontend/public">Home</Link>
-              <Link href="/projects" className={styles.activeLink}>Projects</Link>
-              <Link href="/services">Services</Link>
-              <Link href="/about">About</Link>
-              <Link href="/contact">Contact</Link>
-            </nav>
-          </div>
-          <div className={styles.headerRight}>
-            <div className={styles.searchBox}>
-              <span className="material-symbols-outlined">search</span>
-              <input type="text" placeholder="Search projects..." />
-            </div>
-            <button className={styles.quoteBtn}>Get a Quote</button>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main className={styles.main}>
         {/* Hero Header */}
@@ -190,7 +160,7 @@ export default function ProjectsPage() {
                   <path clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fillRule="evenodd" />
                 </svg>
               </div>
-              <span className={styles.footerLogoText}>HG Walls</span>
+              <span className={styles.footerLogoText}>Elite Facade Solutions</span>
             </div>
             <p className={styles.footerBrandDescription}>
               Delivering world-class facade solutions for iconic architecture worldwide. Excellence in engineering, precision in execution.
@@ -227,7 +197,7 @@ export default function ProjectsPage() {
         </div>
 
         <div className={styles.footerBottom}>
-          <p>© 2024 HG Walls Engineering Ltd. All rights reserved.</p>
+          <p>© 2024 Elite Facade Solutions Engineering Ltd. All rights reserved.</p>
           <div className={styles.footerLegal}>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

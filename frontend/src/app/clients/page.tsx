@@ -5,28 +5,6 @@ import Link from "next/link";
 export default function ClientsPage() {
   return (
     <div className={styles.container}>
-      {/* Navigation */}
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <div className={styles.logo}>
-            <div className={styles.logoIcon}>
-              <svg viewBox="0 0 48 48" fill="currentColor">
-                <path fillRule="evenodd" clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
-              </svg>
-            </div>
-            <h2 className={styles.logoText}>HG Walls</h2>
-          </div>
-          <nav className={styles.nav}>
-            <Link href="/solutions">Solutions</Link>
-            <Link href="/projects">Projects</Link>
-            <Link href="/clients" className={styles.activeLink}>Clients</Link>
-            <Link href="/innovation">Innovation</Link>
-            <Link href="/contact">Contact</Link>
-          </nav>
-          <button className={styles.quoteBtn}>Request Quote</button>
-        </div>
-      </header>
-
       <main className={styles.main}>
         {/* Hero Section */}
         <section className={styles.heroSection}>
@@ -64,7 +42,7 @@ export default function ClientsPage() {
         <section className={styles.ctaSection}>
           <div className={styles.ctaBackground}></div>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle}>Collaborate with HG Walls</h2>
+            <h2 className={styles.ctaTitle}>Collaborate with Elite Facade Solutions</h2>
             <p className={styles.ctaDescription}>
               Ready to elevate your next project? Join our network of industry partners and benefit from our specialized engineering expertise.
             </p>
@@ -86,7 +64,7 @@ export default function ClientsPage() {
                   <path d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
                 </svg>
               </div>
-              <span className={styles.footerLogoText}>HG Walls</span>
+              <span className={styles.footerLogoText}>Elite Facade Solutions</span>
             </div>
             <p className={styles.footerBrandDescription}>
               Global leader in custom facade engineering, providing innovative solutions for the world's most complex architectural challenges.
@@ -125,7 +103,7 @@ export default function ClientsPage() {
         </div>
 
         <div className={styles.footerBottom}>
-          © 2024 HG Walls Engineering Ltd. All rights reserved.
+          © 2024 Elite Facade Solutions Engineering Ltd. All rights reserved.
         </div>
       </footer>
     </div>

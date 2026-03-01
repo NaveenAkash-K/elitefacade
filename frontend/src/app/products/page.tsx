@@ -4,34 +4,6 @@ import { ASSETS, PRODUCTS_DATA, FILTER_BUTTONS, FOOTER_SOLUTIONS, FOOTER_COMPANY
 export default function ProductsPage() {
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <div className={styles.headerLeft}>
-            <div className={styles.logo}>
-              <div className={styles.logoIcon}>
-                <span className="material-symbols-outlined">grid_view</span>
-              </div>
-              <h1 className={styles.logoText}>HG Walls</h1>
-            </div>
-            <nav className={styles.nav}>
-              <a href="/solutions">Solutions</a>
-              <a href="/products" className={styles.activeLink}>Products</a>
-              <a href="/engineering">Engineering</a>
-              <a href="/projects">Projects</a>
-              <a href="/resources">Resources</a>
-            </nav>
-          </div>
-          <div className={styles.headerRight}>
-            <div className={styles.searchBox}>
-              <span className="material-symbols-outlined">search</span>
-              <input type="text" placeholder="Technical search..." />
-            </div>
-            <button className={styles.quoteBtn}>Request Quote</button>
-          </div>
-        </div>
-      </header>
-
       <main className={styles.main}>
         {/* Breadcrumbs & Title */}
         <div className={styles.pageHeader}>
@@ -124,7 +96,7 @@ export default function ProductsPage() {
                 <div className={styles.footerLogoIcon}>
                   <span className="material-symbols-outlined">grid_view</span>
                 </div>
-                <h2>HG Walls</h2>
+                <h2>Elite Facade Solutions</h2>
               </div>
               <p className={styles.footerBrandDescription}>
                 Leading the industry in precision-engineered building envelope solutions. Quality you can build on.
@@ -168,7 +140,7 @@ export default function ProductsPage() {
           </div>
 
           <div className={styles.footerBottom}>
-            <p>© 2024 HG Walls Engineering Ltd. All rights reserved.</p>
+            <p>© 2024 Elite Facade Solutions Engineering Ltd. All rights reserved.</p>
             <div className={styles.footerLegal}>
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Service</a>

@@ -5,30 +5,6 @@ import Link from "next/link";
 export default function AboutPage() {
   return (
     <div className={styles.container}>
-      {/* Header / Navigation */}
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <div className={styles.logo}>
-            <div className={styles.logoIcon}>
-              <svg viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
-              </svg>
-            </div>
-            <h2 className={styles.logoText}>HG Walls</h2>
-          </div>
-          <nav className={styles.nav}>
-            <Link href="/frontend/public">Home</Link>
-            <Link href="/about" className={styles.activeLink}>About Us</Link>
-            <Link href="/services">Services</Link>
-            <Link href="/projects">Projects</Link>
-            <Link href="/contact">Contact</Link>
-          </nav>
-          <div className={styles.headerRight}>
-            <button className={styles.quoteBtn}>Get a Quote</button>
-          </div>
-        </div>
-      </header>
-
       <main>
         {/* Hero Section */}
         <section className={styles.heroSection}>
@@ -62,9 +38,9 @@ export default function AboutPage() {
             <div className={styles.storyGrid}>
               <div className={styles.storyContent}>
                 <div className={styles.storyTextContent}>
-                  <h2 className={styles.storyTitle}>The HG Walls Story</h2>
+                  <h2 className={styles.storyTitle}>The Elite Facade Solutions Story</h2>
                   <p className={styles.storyParagraph}>
-                    HG Walls is a global leader in façade engineering, providing comprehensive end-to-end solutions for high-end corporate environments and iconic landmarks. Our legacy is built on a foundation of structural integrity and aesthetic mastery.
+                      Elite Facade Solutions is a global leader in façade engineering, providing comprehensive end-to-end solutions for high-end corporate environments and iconic landmarks. Our legacy is built on a foundation of structural integrity and aesthetic mastery.
                   </p>
                   <p className={styles.storyParagraph}>
                     Founded with a vision to merge technical precision with architectural beauty, we have consistently pushed the limits of what's possible in building envelope design, ensuring every project is both a masterpiece and a sustainable asset.
@@ -177,7 +153,7 @@ export default function AboutPage() {
                       <path fillRule="evenodd" clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
                     </svg>
                   </div>
-                  <span className={styles.footerLogoText}>HG Walls</span>
+                  <span className={styles.footerLogoText}>Elite Facade Solutions</span>
                 </div>
                 <p className={styles.footerBrandDescription}>
                   Leaders in premium façade engineering and sustainable architectural solutions for the modern world.
@@ -221,7 +197,7 @@ export default function AboutPage() {
             </div>
 
             <div className={styles.footerBottom}>
-              <p>© 2024 HG Walls Engineering Ltd. All Rights Reserved.</p>
+              <p>© 2024 Elite Facade Solutions Engineering Ltd. All Rights Reserved.</p>
               <div className={styles.footerLegal}>
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Service</a>

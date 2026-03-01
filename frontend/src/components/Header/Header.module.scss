@@ -1,0 +1,254 @@
+// Variables (matching page.module.scss)
+$primary: #2d7708;
+$background-light: #f6f8f6;
+$text-dark: #121c0d;
+$border-light: #ebf3e7;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid $border-light;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: $primary;
+  flex-shrink: 0;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.logoIcon {
+  width: 100px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $primary;
+
+  span {
+    font-size: 1.5rem;
+  }
+}
+
+.logoText {
+  color: $text-dark;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.desktopNav {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.navLink {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $text-dark;
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+
+  &:hover {
+    color: $primary;
+  }
+
+  &.active {
+    color: $primary;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $primary;
+      border-radius: 1px;
+    }
+  }
+}
+
+.currentPage {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba($primary, 0.1);
+  border: 1px solid rgba($primary, 0.2);
+  border-radius: 0.5rem;
+  color: $primary;
+  font-weight: 600;
+  font-size: 0.875rem;
+
+  span:first-child {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    display: flex;
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contactBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 120px;
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  background-color: $primary;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba($primary, 0.2);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+
+  span:first-child {
+    font-size: 1.125rem;
+  }
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.mobileMenuToggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background-color: $background-light;
+  border: 1px solid $border-light;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: $text-dark;
+  transition: all 0.2s ease;
+
+  span {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    background-color: rgba($primary, 0.1);
+    color: $primary;
+    border-color: $primary;
+  }
+
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+}
+
+.mobileNav {
+  display: none;
+  flex-direction: column;
+  padding: 1rem 1.5rem 1.5rem;
+  background-color: white;
+  border-top: 1px solid $border-light;
+
+  &.open {
+    display: flex;
+  }
+
+  @media (min-width: 1025px) {
+    display: none !important;
+  }
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  text-decoration: none;
+  color: $text-dark;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+
+  span {
+    color: $primary;
+  }
+
+  &:hover {
+    background-color: $background-light;
+    color: $primary;
+  }
+
+  &.active {
+    background-color: rgba($primary, 0.1);
+    color: $primary;
+  }
+}
+
+.mobileContactBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: $primary;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba($primary, 0.2);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}

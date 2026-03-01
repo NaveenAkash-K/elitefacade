@@ -23,12 +23,12 @@ export const FAQ_ITEMS = [
     answer: "We specialize in high-performance unitized curtain walls, rainscreen cladding, and bespoke architectural metal systems designed for commercial and institutional projects. Our expertise covers both standard high-rise solutions and complex, custom-engineered geometries that require advanced fabrication techniques.",
   },
   {
-    question: "How do HG Walls ensure thermal efficiency in high-rise buildings?",
+    question: "How do Elite Facade Solutions ensure thermal efficiency in high-rise buildings?",
     answer: "Our systems utilize advanced thermal break technologies, high-performance glazing, and integrated solar shading solutions. We conduct extensive thermal modeling (including U-value and condensation analysis) to ensure our façades meet or exceed international energy codes while maximizing occupant comfort.",
   },
   {
     question: "Are your materials compliant with international fire safety standards?",
-    answer: "Yes, fire safety is a cornerstone of our engineering process. All HG Walls assemblies are tested to meet rigorous standards such as NFPA 285 (North America), BS 8414 (UK/International), and equivalent regional codes. We use only non-combustible or fire-retardant cores and integrate fire-stopping systems at every floor slab.",
+    answer: "Yes, fire safety is a cornerstone of our engineering process. All Elite Facade Solutions assemblies are tested to meet rigorous standards such as NFPA 285 (North America), BS 8414 (UK/International), and equivalent regional codes. We use only non-combustible or fire-retardant cores and integrate fire-stopping systems at every floor slab.",
   },
   {
     question: "What is the typical lead time for a custom façade project?",
@@ -36,7 +36,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: "Do you provide on-site installation supervision?",
-    answer: "Absolutely. For every project, HG Walls assigns a dedicated field engineer to provide on-site technical supervision. They oversee quality control, ensure proper sealing techniques, and conduct periodic field performance testing (like water hose tests) to guarantee the final envelope is watertight and airtight.",
+    answer: "Absolutely. For every project, Elite Facade Solutions assigns a dedicated field engineer to provide on-site technical supervision. They oversee quality control, ensure proper sealing techniques, and conduct periodic field performance testing (like water hose tests) to guarantee the final envelope is watertight and airtight.",
   },
 ];
 

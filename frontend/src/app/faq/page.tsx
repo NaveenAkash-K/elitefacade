@@ -14,37 +14,6 @@ export default function FAQPage() {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <div className={styles.headerLeft}>
-            <div className={styles.logo}>
-              <div className={styles.logoIcon}>
-                <svg viewBox="0 0 48 48" fill="currentColor">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
-                </svg>
-              </div>
-              <h1 className={styles.logoText}>HG Walls</h1>
-            </div>
-            <nav className={styles.nav}>
-              <Link href="/frontend/public">Home</Link>
-              <Link href="/products">Products</Link>
-              <Link href="/services">Services</Link>
-              <Link href="/projects">Projects</Link>
-              <Link href="/faq" className={styles.activeLink}>FAQ</Link>
-              <Link href="/contact">Contact</Link>
-            </nav>
-          </div>
-          <div className={styles.headerRight}>
-            <div className={styles.searchBox}>
-              <span className="material-symbols-outlined">search</span>
-              <input type="text" placeholder="Search documentation..." />
-            </div>
-            <button className={styles.quoteBtn}>Get a Quote</button>
-          </div>
-        </div>
-      </header>
-
       <main className={styles.main}>
         <div className={styles.mainContent}>
           {/* Hero Section */}
@@ -145,7 +114,7 @@ export default function FAQPage() {
                     <path fillRule="evenodd" clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
                   </svg>
                 </div>
-                <h1>HG Walls</h1>
+                <h1>Elite Facade Solutions</h1>
               </div>
               <p className={styles.footerBrandDescription}>
                 Leading the industry in sustainable façade engineering and advanced building envelope solutions.
@@ -175,7 +144,7 @@ export default function FAQPage() {
           </div>
 
           <div className={styles.footerBottom}>
-            <p>© 2024 HG Walls Façade Engineering. All rights reserved.</p>
+            <p>© 2024 Elite Facade Solutions Façade Engineering. All rights reserved.</p>
             <div className={styles.footerLegal}>
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Service</a>

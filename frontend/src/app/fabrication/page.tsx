@@ -4,30 +4,6 @@ import { ASSETS, STATS_DATA, PRODUCTION_ITEMS, QA_FEATURES, FOOTER_CAPABILITIES,
 export default function FabricationPage() {
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <div className={styles.logo}>
-            <span className="material-symbols-outlined">factory</span>
-            <h2 className={styles.logoText}>HG Walls</h2>
-          </div>
-          <nav className={styles.nav}>
-            <a href="/solutions">Solutions</a>
-            <a href="/fabrication" className={styles.activeLink}>Fabrication</a>
-            <a href="/projects">Projects</a>
-            <a href="/engineering">Engineering</a>
-            <a href="/contact">Contact</a>
-          </nav>
-        </div>
-        <div className={styles.headerRight}>
-          <div className={styles.searchBox}>
-            <span className="material-symbols-outlined">search</span>
-            <input type="text" placeholder="Search facilities..." />
-          </div>
-          <button className={styles.specsBtn}>Request Technical Specs</button>
-        </div>
-      </header>
-
       <main className={styles.main}>
         {/* Hero Section */}
         <section className={styles.heroSection}>
@@ -171,7 +147,7 @@ export default function FabricationPage() {
           <div className={styles.footerBrand}>
             <div className={styles.footerLogo}>
               <span className="material-symbols-outlined">factory</span>
-              <h2>HG Walls</h2>
+              <h2>Elite Facade Solutions</h2>
             </div>
             <p className={styles.footerDescription}>
               Leading the industry in modular façade engineering and advanced fabrication services.
@@ -207,7 +183,7 @@ export default function FabricationPage() {
         </div>
 
         <div className={styles.footerBottom}>
-          <p>© 2024 HG Walls Structural Systems LLC. All rights reserved.</p>
+          <p>© 2024 Elite Facade Solutions Structural Systems LLC. All rights reserved.</p>
           <div className={styles.footerLegal}>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

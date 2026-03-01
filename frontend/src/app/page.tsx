@@ -4,32 +4,6 @@ import { ASSETS } from './assets';
 export default function Home() {
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <div className={styles.logo}>
-            <div className={styles.logoIcon}>
-              <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fillRule="evenodd" />
-              </svg>
-            </div>
-            <h2 className={styles.logoText}>HG Walls</h2>
-          </div>
-
-          <nav className={styles.nav}>
-            <a href="#">Services</a>
-            <a href="#">Projects</a>
-            <a href="#">Products</a>
-            <a href="#">About Us</a>
-            <a href="#">Sustainability</a>
-          </nav>
-
-          <div className={styles.headerActions}>
-            <button className={styles.contactBtn}>Contact Us</button>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main>
         {/* Hero Section */}
@@ -181,7 +155,7 @@ export default function Home() {
                   <path clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fillRule="evenodd" />
                 </svg>
               </div>
-              <span className={styles.footerLogoText}>HG Walls</span>
+              <span className={styles.footerLogoText}>Elite Facade Solutions</span>
             </div>
             <p className={styles.footerBrandDescription}>
               Redefining skylines through innovative façade engineering and sustainable architectural solutions for the modern world.
@@ -228,7 +202,7 @@ export default function Home() {
         </div>
 
         <div className={styles.footerBottom}>
-          <p>© 2024 HG Walls Engineering Ltd. All rights reserved.</p>
+          <p>© 2024 Elite Facade Solutions Engineering Ltd. All rights reserved.</p>
           <div className={styles.footerLegal}>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

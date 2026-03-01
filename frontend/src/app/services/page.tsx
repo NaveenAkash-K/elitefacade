@@ -14,29 +14,6 @@ import Link from "next/link";
 export default function ServicesPage() {
   return (
     <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <div className={styles.logo}>
-            <div className={styles.logoIcon}>
-              <svg viewBox="0 0 48 48" fill="currentColor">
-                <path fillRule="evenodd" clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
-              </svg>
-            </div>
-            <h2 className={styles.logoText}>HG Walls</h2>
-          </div>
-        </div>
-        <div className={styles.headerRight}>
-          <nav className={styles.nav}>
-            <Link href="/frontend/public">Home</Link>
-            <Link href="/services" className={styles.activeLink}>Services</Link>
-            <Link href="/portfolio">Portfolio</Link>
-            <Link href="/about">About</Link>
-          </nav>
-          <button className={styles.quoteBtn}>Request Quote</button>
-        </div>
-      </header>
-
       <main className={styles.main}>
         {/* Hero Section */}
         <div className={styles.heroSection}>
@@ -152,7 +129,7 @@ export default function ServicesPage() {
         <section className={styles.whyChooseSection}>
           <div className={styles.whyChooseGrid}>
             <div className={styles.whyChooseContent}>
-              <h2 className={styles.whyChooseTitle}>Why Industry Leaders Choose HG Walls</h2>
+              <h2 className={styles.whyChooseTitle}>Why Industry Leaders Choose Elite Facade Solutions</h2>
               <div className={styles.featuresList}>
                 {WHY_CHOOSE_US.map((item, index) => (
                   <div key={index} className={styles.featureItem}>
@@ -217,11 +194,11 @@ export default function ServicesPage() {
                   <path d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
                 </svg>
               </div>
-              <span>HG Walls</span>
+              <span>Elite Facade Solutions</span>
             </div>
           </div>
           <div className={styles.footerCopyright}>
-            © 2024 HG Walls Façade Engineering. All Rights Reserved.
+            © 2024 Elite Facade Solutions Façade Engineering. All Rights Reserved.
           </div>
           <div className={styles.footerSocial}>
             <Link href="#"><span className="material-symbols-outlined">language</span></Link>
