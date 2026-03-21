@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/types/navigation";
 import styles from "./Header.module.scss";
 import Image from "next/image";
-import logo from "src/asserts/logo.jpeg"
+import logo from "src/asserts/logo.png";
 
 const Header: React.FC = () => {
   const pathname = usePathname();
