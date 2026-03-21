@@ -28,6 +28,8 @@ const Header: React.FC = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  if(pathname === "/admin") return null;
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>

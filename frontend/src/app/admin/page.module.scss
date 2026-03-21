@@ -1,0 +1,860 @@
+@use '../../styles/variables' as *;
+
+// ═══════════════════════════════════════════════════════════
+// LOGIN PAGE
+// ═══════════════════════════════════════════════════════════
+
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $background-dark 0%, darken($background-dark, 5%) 100%);
+  padding: $spacing-6;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 420px;
+  background: $white;
+  border-radius: $radius-xl;
+  padding: $spacing-10;
+  box-shadow: $shadow-2xl;
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: $spacing-8;
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-black;
+    color: $text-primary;
+    margin: $spacing-4 0 $spacing-1;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+  }
+}
+
+.loginLogo {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto;
+  color: $primary;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.loginError {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-3 $spacing-4;
+  background: rgba(#ef4444, 0.1);
+  border: 1px solid rgba(#ef4444, 0.3);
+  border-radius: $radius-md;
+  color: #ef4444;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+
+  .material-symbols-outlined {
+    font-size: 1.125rem;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  border: 1px solid $border-light;
+  border-radius: $radius-md;
+  padding: 0 $spacing-4;
+  transition: border-color $transition-fast;
+
+  &:focus-within {
+    border-color: $primary;
+  }
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+    color: $text-muted;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: $spacing-3 0;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background: transparent;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+}
+
+.loginBtn {
+  width: 100%;
+  padding: $spacing-3;
+  background: $primary;
+  color: $white;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: background $transition-fast;
+  margin-top: $spacing-2;
+
+  &:hover:not(:disabled) {
+    background: darken($primary, 8%);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ADMIN LAYOUT
+// ═══════════════════════════════════════════════════════════
+
+.adminLayout {
+  display: flex;
+  min-height: 100vh;
+  background: $slate-50;
+}
+
+// ─── Sidebar ───────────────────────────────────────────────
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: $background-dark;
+  color: $white;
+  transition: width $transition-medium;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebarOpen {
+  width: 260px;
+}
+
+.sidebarClosed {
+  width: 72px;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  padding: $spacing-6 $spacing-5;
+  border-bottom: 1px solid rgba($white, 0.08);
+}
+
+.sidebarLogo {
+  width: 2rem;
+  height: 2rem;
+  color: $primary;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.sidebarBrand {
+  overflow: hidden;
+  white-space: nowrap;
+
+  h2 {
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  span {
+    font-size: $font-size-xs;
+    color: $slate-400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.sidebarNav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-1;
+  padding: $spacing-4 $spacing-3;
+}
+
+.sidebarLink {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  padding: $spacing-3 $spacing-4;
+  border-radius: $radius-md;
+  border: none;
+  background: transparent;
+  color: $slate-400;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: left;
+  white-space: nowrap;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: rgba($white, 0.06);
+    color: $white;
+  }
+}
+
+.sidebarLinkActive {
+  background: rgba($primary, 0.15) !important;
+  color: $primary !important;
+  font-weight: $font-weight-bold;
+}
+
+.sidebarFooter {
+  padding: $spacing-4 $spacing-3;
+  border-top: 1px solid rgba($white, 0.08);
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  padding: $spacing-3 $spacing-4;
+  border-radius: $radius-md;
+  border: none;
+  background: transparent;
+  color: $slate-400;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  transition: all $transition-fast;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: rgba(#ef4444, 0.1);
+    color: #ef4444;
+  }
+}
+
+// ─── Main Area ─────────────────────────────────────────────
+
+.mainArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4 $spacing-8;
+  background: $white;
+  border-bottom: 1px solid $border-light;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.menuToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $radius-md;
+  border: 1px solid $border-light;
+  background: transparent;
+  color: $text-primary;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $slate-50;
+  }
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+}
+
+.adminUser {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $text-secondary;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+    color: $primary;
+  }
+}
+
+.pageContent {
+  flex: 1;
+  padding: $spacing-8;
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB CONTENT — SHARED STYLES
+// ═══════════════════════════════════════════════════════════
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+}
+
+.tabHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-4;
+
+  h2 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-black;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin: $spacing-1 0 0;
+  }
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-2 $spacing-5;
+  background: $primary;
+  color: $white;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: background $transition-fast;
+  white-space: nowrap;
+
+  .material-symbols-outlined {
+    font-size: 1.125rem;
+  }
+
+  &:hover {
+    background: darken($primary, 8%);
+  }
+}
+
+// ─── Item Cards ────────────────────────────────────────────
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-5;
+}
+
+.itemCard {
+  background: $white;
+  border: 1px solid $border-light;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+}
+
+.itemCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4 $spacing-6;
+  background: $slate-50;
+  border-bottom: 1px solid $border-light;
+
+  h3 {
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin: 0;
+  }
+}
+
+.removeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: $radius-md;
+  border: none;
+  background: transparent;
+  color: $slate-400;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover:not(:disabled) {
+    background: rgba(#ef4444, 0.1);
+    color: #ef4444;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.itemCardBody {
+  display: flex;
+  gap: $spacing-6;
+  padding: $spacing-6;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+  }
+}
+
+// ─── Image Upload ──────────────────────────────────────────
+
+.imageUpload {
+  flex-shrink: 0;
+  width: 220px;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+  }
+}
+
+.imageUploadLabel {
+  display: block;
+  cursor: pointer;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 2px dashed $slate-200;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $primary;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.imagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: $spacing-2;
+  color: $slate-400;
+  background: $slate-50;
+
+  .material-symbols-outlined {
+    font-size: 2rem;
+  }
+
+  span:last-child {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+// ─── Form Fields ───────────────────────────────────────────
+
+.fieldsGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-4;
+  align-content: start;
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-1;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: $spacing-2 $spacing-3;
+    border: 1px solid $border-light;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background: $white;
+    transition: border-color $transition-fast;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  select {
+    cursor: pointer;
+  }
+}
+
+// ─── Specs / Feature Lists ─────────────────────────────────
+
+.specsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.specItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+
+  input {
+    flex: 1;
+    padding: $spacing-2 $spacing-3;
+    border: 1px solid $border-light;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    color: $text-primary;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+  }
+}
+
+.specRemoveBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: $radius-full;
+  border: none;
+  background: transparent;
+  color: $slate-400;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: rgba(#ef4444, 0.1);
+    color: #ef4444;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .material-symbols-outlined {
+    font-size: 1rem;
+  }
+}
+
+.addSpecBtn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  padding: $spacing-1 $spacing-3;
+  border: 1px dashed $slate-300;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  width: fit-content;
+  transition: all $transition-fast;
+
+  .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    border-color: $primary;
+    background: rgba($primary, 0.05);
+  }
+}
+
+// ─── Icon Select ───────────────────────────────────────────
+
+.iconSelect {
+  padding: $spacing-2 $spacing-3;
+  border: 1px solid $border-light;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  color: $text-primary;
+  background: $white;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+  }
+}
+
+// ─── Sub Section (for Services / Fabrication / About) ──────
+
+.subSection {
+  background: $white;
+  border: 1px solid $border-light;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+}
+
+.subSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4 $spacing-6;
+  background: $slate-50;
+  border-bottom: 1px solid $border-light;
+
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin: 0;
+  }
+}
+
+.subSectionBody {
+  padding: $spacing-6;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.subSectionAddBtn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  padding: $spacing-2 $spacing-4;
+  border: 1px dashed $slate-300;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  width: fit-content;
+
+  .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    border-color: $primary;
+    background: rgba($primary, 0.05);
+  }
+}
+
+// ─── Inline Row (icon + title + description side by side) ──
+
+.inlineRow {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-3;
+  padding: $spacing-4;
+  border: 1px solid $border-light;
+  border-radius: $radius-md;
+  background: $slate-50;
+}
+
+.inlineRowFields {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: $spacing-3;
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: $spacing-2 $spacing-3;
+    border: 1px solid $border-light;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background: $white;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+}
+
+.inlineRowFullFields {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-3;
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+
+  input,
+  textarea {
+    padding: $spacing-2 $spacing-3;
+    border: 1px solid $border-light;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background: $white;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+  }
+}
+
+.inlineRemoveBtn {
+  @extend .removeBtn;
+  flex-shrink: 0;
+  margin-top: $spacing-1;
+}
+
+// ─── Save Bar ──────────────────────────────────────────────
+
+.saveBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-4;
+  padding: $spacing-4 0;
+  border-top: 1px solid $border-light;
+}
+
+.saveBtn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-3 $spacing-8;
+  background: $primary;
+  color: $white;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  .material-symbols-outlined {
+    font-size: 1.125rem;
+  }
+
+  &:hover:not(:disabled) {
+    background: darken($primary, 8%);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.saveMessage {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}
+
+.saveSuccess {
+  color: $primary;
+}
+
+.saveError {
+  color: #ef4444;
+}
