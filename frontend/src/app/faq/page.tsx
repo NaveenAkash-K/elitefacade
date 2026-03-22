@@ -102,56 +102,6 @@ export default function FAQPage() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <div className={styles.footerGrid}>
-            <div className={styles.footerBrand}>
-              <div className={styles.footerLogo}>
-                <div className={styles.footerLogoIcon}>
-                  <svg viewBox="0 0 48 48" fill="currentColor">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
-                  </svg>
-                </div>
-                <h1>Elite Facade Solutions</h1>
-              </div>
-              <p className={styles.footerBrandDescription}>
-                Leading the industry in sustainable façade engineering and advanced building envelope solutions.
-              </p>
-            </div>
-
-            <div className={styles.footerColumn}>
-              <p className={styles.footerColumnTitle}>Company</p>
-              {FOOTER_COMPANY.map((item, index) => (
-                <a key={index} href="#">{item}</a>
-              ))}
-            </div>
-
-            <div className={styles.footerColumn}>
-              <p className={styles.footerColumnTitle}>Resources</p>
-              {FOOTER_RESOURCES.map((item, index) => (
-                <a key={index} href="#">{item}</a>
-              ))}
-            </div>
-
-            <div className={styles.footerColumn}>
-              <p className={styles.footerColumnTitle}>Contact</p>
-              {FOOTER_CONTACT.map((item, index) => (
-                <a key={index} href="#">{item}</a>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.footerBottom}>
-            <p>© 2024 Elite Facade Solutions Façade Engineering. All rights reserved.</p>
-            <div className={styles.footerLegal}>
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Service</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

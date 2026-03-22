@@ -24,12 +24,7 @@ export default function ProjectsPage() {
             <button className={styles.filterTab}>Sustainability</button>
           </div>
           <div className={styles.sortBy}>
-            <span className={styles.sortLabel}>Sort By:</span>
-            <select className={styles.sortSelect}>
-              <option>Recent Completion</option>
-              <option>Project Scale</option>
-              <option>Location</option>
-            </select>
+
           </div>
         </div>
 
@@ -149,62 +144,6 @@ export default function ProjectsPage() {
           </button>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerGrid}>
-          <div className={styles.footerBrand}>
-            <div className={styles.footerLogo}>
-              <div className={styles.footerLogoIcon}>
-                <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                  <path clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fillRule="evenodd" />
-                </svg>
-              </div>
-              <span className={styles.footerLogoText}>Elite Facade Solutions</span>
-            </div>
-            <p className={styles.footerBrandDescription}>
-              Delivering world-class facade solutions for iconic architecture worldwide. Excellence in engineering, precision in execution.
-            </p>
-            <div className={styles.socialLinks}>
-              <a href="#" className={styles.socialLink}>
-                <span className="material-symbols-outlined">public</span>
-              </a>
-              <a href="#" className={styles.socialLink}>
-                <span className="material-symbols-outlined">mail</span>
-              </a>
-            </div>
-          </div>
-
-          <div className={styles.footerColumn}>
-            <h4 className={styles.footerColumnTitle}>Services</h4>
-            <ul className={styles.footerLinks}>
-              <li><a href="#">Curtain Walls</a></li>
-              <li><a href="#">Structural Glazing</a></li>
-              <li><a href="#">Interior Partitions</a></li>
-              <li><a href="#">Maintenance</a></li>
-            </ul>
-          </div>
-
-          <div className={styles.footerColumn}>
-            <h4 className={styles.footerColumnTitle}>Company</h4>
-            <ul className={styles.footerLinks}>
-              <li><a href="#">Our History</a></li>
-              <li><a href="#">Technical Standards</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className={styles.footerBottom}>
-          <p>© 2024 Elite Facade Solutions Engineering Ltd. All rights reserved.</p>
-          <div className={styles.footerLegal}>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookies</a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

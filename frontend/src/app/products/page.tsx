@@ -16,25 +16,6 @@ export default function ProductsPage() {
             </div>
           </div>
         </div>
-
-        {/* Filters Section */}
-        <div className={styles.filtersSection}>
-          {FILTER_BUTTONS.map((filter, index) => (
-            <button
-              key={index}
-              className={`${styles.filterBtn} ${index === 0 ? styles.filterActive : ''}`}
-            >
-              {index === 0 && (
-                <span className="material-symbols-outlined">filter_alt</span>
-              )}
-              {filter.label}
-              {filter.hasDropdown && (
-                <span className="material-symbols-outlined">keyboard_arrow_down</span>
-              )}
-            </button>
-          ))}
-        </div>
-
         {/* Product Grid */}
         <div className={styles.productGrid}>
           {PRODUCTS_DATA.map((product, index) => (
@@ -81,69 +62,6 @@ export default function ProductsPage() {
           </button>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <div className={styles.footerGrid}>
-            <div className={styles.footerBrand}>
-              <div className={styles.footerLogo}>
-                <div className={styles.footerLogoIcon}>
-                  <span className="material-symbols-outlined">grid_view</span>
-                </div>
-                <h2>Elite Facade Solutions</h2>
-              </div>
-              <p className={styles.footerBrandDescription}>
-                Leading the industry in precision-engineered building envelope solutions. Quality you can build on.
-              </p>
-              <div className={styles.footerSocial}>
-                <a href="#"><span className="material-symbols-outlined">link</span></a>
-                <a href="#"><span className="material-symbols-outlined">share</span></a>
-                <a href="#"><span className="material-symbols-outlined">mail</span></a>
-              </div>
-            </div>
-
-            <div className={styles.footerColumn}>
-              <h4 className={styles.footerColumnTitle}>Solutions</h4>
-              <ul className={styles.footerLinks}>
-                {FOOTER_SOLUTIONS.map((item, index) => (
-                  <li key={index}><a href="#">{item}</a></li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.footerColumn}>
-              <h4 className={styles.footerColumnTitle}>Company</h4>
-              <ul className={styles.footerLinks}>
-                {FOOTER_COMPANY.map((item, index) => (
-                  <li key={index}><a href="#">{item}</a></li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.footerColumn}>
-              <h4 className={styles.footerColumnTitle}>Global Offices</h4>
-              <div className={styles.footerAddresses}>
-                {FOOTER_OFFICES.map((office, index) => (
-                  <div key={index} className={styles.footerAddress}>
-                    <span className="material-symbols-outlined">location_on</span>
-                    <span>{office}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.footerBottom}>
-            <p>© 2024 Elite Facade Solutions Engineering Ltd. All rights reserved.</p>
-            <div className={styles.footerLegal}>
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Service</a>
-              <a href="#">Cookie Settings</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

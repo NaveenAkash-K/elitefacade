@@ -134,63 +134,11 @@ export default function FabricationPage() {
               Consult with our engineering team to see how our fabrication capabilities can optimize your schedule and budget.
             </p>
             <div className={styles.ctaButtons}>
-              <button className={styles.ctaPrimaryBtn}>Book a Factory Visit</button>
               <button className={styles.ctaSecondaryBtn}>Get a Technical Quote</button>
             </div>
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerGrid}>
-          <div className={styles.footerBrand}>
-            <div className={styles.footerLogo}>
-              <span className="material-symbols-outlined">factory</span>
-              <h2>Elite Facade Solutions</h2>
-            </div>
-            <p className={styles.footerDescription}>
-              Leading the industry in modular façade engineering and advanced fabrication services.
-            </p>
-          </div>
-
-          <div className={styles.footerColumn}>
-            <h6 className={styles.footerColumnTitle}>Capabilities</h6>
-            <ul className={styles.footerLinks}>
-              {FOOTER_CAPABILITIES.map((item, index) => (
-                <li key={index}><a href="#">{item}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className={styles.footerColumn}>
-            <h6 className={styles.footerColumnTitle}>Corporate</h6>
-            <ul className={styles.footerLinks}>
-              {FOOTER_CORPORATE.map((item, index) => (
-                <li key={index}><a href="#">{item}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className={styles.footerColumn}>
-            <h6 className={styles.footerColumnTitle}>Headquarters</h6>
-            <div className={styles.footerAddress}>
-              <p>888 Fabrication Way</p>
-              <p>Industrial District, Chicago IL</p>
-              <p className={styles.footerPhone}>+1 (555) 942-1200</p>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.footerBottom}>
-          <p>© 2024 Elite Facade Solutions Structural Systems LLC. All rights reserved.</p>
-          <div className={styles.footerLegal}>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Supplier Portal</a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

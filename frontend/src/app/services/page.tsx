@@ -183,30 +183,6 @@ export default function ServicesPage() {
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <div className={styles.footerBrand}>
-            <div className={styles.footerLogo}>
-              <div className={styles.footerLogoIcon}>
-                <svg viewBox="0 0 48 48" fill="currentColor">
-                  <path d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" />
-                </svg>
-              </div>
-              <span>Elite Facade Solutions</span>
-            </div>
-          </div>
-          <div className={styles.footerCopyright}>
-            © 2024 Elite Facade Solutions Façade Engineering. All Rights Reserved.
-          </div>
-          <div className={styles.footerSocial}>
-            <Link href="#"><span className="material-symbols-outlined">language</span></Link>
-            <Link href="#"><span className="material-symbols-outlined">mail</span></Link>
-            <Link href="#"><span className="material-symbols-outlined">description</span></Link>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
