@@ -1,0 +1,564 @@
+{
+  "info": {
+    "name": "Elite Facade Solutions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) pm.collectionVariables.set('token', res.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin@123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/products"
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/products/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", ":id"],
+              "variable": [{ "key": "id", "value": "PRODUCT_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Create Products",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/products",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "items",
+                  "value": "[{\"title\":\"HG-800 Unitized Series\",\"description\":\"Prefabricated panelized façade for rapid installation.\",\"badge\":\"Best Seller\",\"specs\":[\"U-Value: 0.85 W/m²K\",\"Wind Load: Up to 5.0 kPa\"]}]",
+                  "type": "text"
+                },
+                {
+                  "key": "image_0",
+                  "type": "file",
+                  "src": [],
+                  "description": "Image for items[0]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/products/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "PRODUCT_ID_HERE" }]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "title", "value": "HG-800 Unitized Series", "type": "text" },
+                { "key": "description", "value": "Updated description.", "type": "text" },
+                { "key": "badge", "value": "New Arrival", "type": "text" },
+                { "key": "specs", "value": "[\"U-Value: 0.90 W/m²K\"]", "type": "text" },
+                { "key": "image", "type": "file", "src": [], "description": "Optional new image" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/products/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "PRODUCT_ID_HERE" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get All Projects",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/projects"
+          }
+        },
+        {
+          "name": "Get Project by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/projects/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", ":id"],
+              "variable": [{ "key": "id", "value": "PROJECT_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Create Projects",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/projects",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "items",
+                  "value": "[{\"title\":\"The Zenith Plaza\",\"category\":\"Exterior Facade\",\"location\":\"Dubai, UAE\",\"alt\":\"Corporate Tower Facade\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "image_0",
+                  "type": "file",
+                  "src": [],
+                  "description": "Image for items[0]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/projects/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "PROJECT_ID_HERE" }]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "title", "value": "The Zenith Plaza", "type": "text" },
+                { "key": "category", "value": "Commercial Glass", "type": "text" },
+                { "key": "location", "value": "Abu Dhabi, UAE", "type": "text" },
+                { "key": "alt", "value": "Updated alt text", "type": "text" },
+                { "key": "image", "type": "file", "src": [], "description": "Optional new image" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/projects/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "PROJECT_ID_HERE" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "Get Services",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/services"
+          }
+        },
+        {
+          "name": "Get Service Item by Type & ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/services/:type/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["services", ":type", ":id"],
+              "variable": [
+                { "key": "type", "value": "regions", "description": "regions | phases | steps | whyUs" },
+                { "key": "id", "value": "SUB_DOCUMENT_ID_HERE" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Upsert Services",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/services",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "regions",
+                  "value": "[{\"icon\":\"public\",\"title\":\"North America\",\"description\":\"Strategic headquarters managing high-profile developments.\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "phases",
+                  "value": "[{\"title\":\"Technical Consultation\",\"description\":\"Feasibility studies and structural performance analysis.\",\"features\":[\"Risk Assessment\",\"Budget Estimation\"]}]",
+                  "type": "text"
+                },
+                {
+                  "key": "steps",
+                  "value": "[{\"title\":\"Initial Assessment\",\"description\":\"We evaluate the project scope and requirements.\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "whyUs",
+                  "value": "[{\"icon\":\"verified\",\"title\":\"Certified Experts\",\"description\":\"Our team holds international facade engineering certifications.\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "image_0",
+                  "type": "file",
+                  "src": [],
+                  "description": "Image for phases[0]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Region",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/services/regions/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "REGION_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Phase",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/services/phases/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "PHASE_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Step",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/services/steps/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "STEP_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Why Us",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/services/why-us/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "WHYUS_ID_HERE" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fabrication",
+      "item": [
+        {
+          "name": "Get Fabrication",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/fabrication"
+          }
+        },
+        {
+          "name": "Get Fabrication Item by Type & ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/fabrication/:type/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["fabrication", ":type", ":id"],
+              "variable": [
+                { "key": "type", "value": "items", "description": "stats | items | qaFeatures" },
+                { "key": "id", "value": "SUB_DOCUMENT_ID_HERE" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Upsert Fabrication",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/fabrication",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "stats",
+                  "value": "[{\"icon\":\"precision_manufacturing\",\"label\":\"Tolerance\",\"value\":\"± 0.25mm\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "items",
+                  "value": "[{\"title\":\"Automated Milling\",\"alt\":\"CNC milling station\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "qaFeatures",
+                  "value": "[{\"icon\":\"verified\",\"title\":\"Real-Time Monitoring\",\"description\":\"Continuous quality checks throughout production.\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "image_0",
+                  "type": "file",
+                  "src": [],
+                  "description": "Image for items[0]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Fabrication Stat",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/fabrication/stats/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "STAT_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Fabrication Item",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/fabrication/items/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "ITEM_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Delete QA Feature",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/fabrication/qa-features/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "QAFEATURE_ID_HERE" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "Get All Clients",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/clients"
+          }
+        },
+        {
+          "name": "Get Client by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/clients/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["clients", ":id"],
+              "variable": [{ "key": "id", "value": "CLIENT_ID_HERE" }]
+            }
+          }
+        },
+        {
+          "name": "Create Clients",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/clients",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "items",
+                  "value": "[{\"name\":\"Skanska Group\",\"alt\":\"Skanska Group logo\",\"showInHomePage\":true}]",
+                  "type": "text"
+                },
+                {
+                  "key": "image_0",
+                  "type": "file",
+                  "src": [],
+                  "description": "Image for items[0]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Client",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/clients/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "CLIENT_ID_HERE" }]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "Skanska Group", "type": "text" },
+                { "key": "alt", "value": "Updated logo alt", "type": "text" },
+                { "key": "showInHomePage", "value": "false", "type": "text" },
+                { "key": "image", "type": "file", "src": [], "description": "Optional new image" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Client",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/clients/:id",
+            "url_template": {
+              "variable": [{ "key": "id", "value": "CLIENT_ID_HERE" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stats",
+      "item": [
+        {
+          "name": "Get Stats",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/stats"
+          }
+        },
+        {
+          "name": "Update Stats",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/stats",
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"projectsCompleted\": \"500+\",\n  \"clients\": \"200+\",\n  \"yearsOfExcellence\": \"15+\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "About",
+      "item": [
+        {
+          "name": "Get About",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/about"
+          }
+        },
+        {
+          "name": "Upsert About",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/about",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "storyText1", "value": "Elite Facade Solutions is a global leader in façade engineering...", "type": "text" },
+                { "key": "storyText2", "value": "Founded with a vision to merge technical precision...", "type": "text" },
+                {
+                  "key": "coreValues",
+                  "value": "[{\"icon\":\"straighten\",\"title\":\"Precision\",\"description\":\"Every millimeter matters.\"}]",
+                  "type": "text"
+                },
+                {
+                  "key": "certifications",
+                  "value": "[{\"icon\":\"new_releases\",\"label\":\"ISO 9001:2015\"}]",
+                  "type": "text"
+                },
+                { "key": "heroImageFile", "type": "file", "src": [], "description": "Hero image" },
+                { "key": "storyImageFile", "type": "file", "src": [], "description": "Story image" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
