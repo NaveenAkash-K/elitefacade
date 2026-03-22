@@ -124,12 +124,7 @@ export default function AboutPage() {
         <section className={styles.certificationsSection}>
           <div className={styles.certificationsSectionInner}>
             <div className={styles.certificationsContent}>
-              <div className={styles.certificationsText}>
-                <h3 className={styles.certificationsTitle}>Quality Certified</h3>
-                <p className={styles.certificationsDescription}>
-                  We maintain the highest international standards in safety, environmental impact, and engineering quality.
-                </p>
-              </div>
+              <div></div>
               <div className={styles.certificationsGrid}>
                 {CERTIFICATIONS.map((cert, index) => (
                   <div key={index} className={styles.certificationItem}>

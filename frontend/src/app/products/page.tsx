@@ -7,11 +7,6 @@ export default function ProductsPage() {
       <main className={styles.main}>
         {/* Breadcrumbs & Title */}
         <div className={styles.pageHeader}>
-          <div className={styles.breadcrumbs}>
-            <a href="/frontend/public">Home</a>
-            <span className="material-symbols-outlined">arrow_forward_ios</span>
-            <span>Products</span>
-          </div>
           <div className={styles.titleSection}>
             <div className={styles.titleContent}>
               <h2 className={styles.pageTitle}>Architectural Façade Systems</h2>
