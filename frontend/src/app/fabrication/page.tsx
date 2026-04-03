@@ -12,8 +12,8 @@ const HERO_IMAGE =
 const QA_IMAGE =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBxmZ0yQGJXmMjkC76QRKpvYvpOaoQMPL-Agp9qaJagg0KeEyqsx7UI9CarIBPJc6vSGtJZwk39UOQJ0PW4QHz7wI4_rU4qbGqx1LSwWsgVUW971o5SadtrnGFxIP7kCwSV5U_71kKscrrcF1PbA40C-P29iYZK8AMclQbdlL2fR4mHVZZu1LfYoVh6q3YKQhW0H0tVx2i6d7IuSdpZqPV2x828NIODD6d5ruWGfOOQQIO9E_cLc3Z7PAzhFREOtyoEZstARxOWOoyd";
 
-function getImageUrl(image: string): string | null {
-  if (!image) return null;
+function getImageUrl(image: string): string {
+  if (!image) return "";
   if (image.startsWith("http")) return image;
   const cleanPath = image.startsWith("/") ? image.slice(1) : image;
   return `${API_URL}/${cleanPath}`;
