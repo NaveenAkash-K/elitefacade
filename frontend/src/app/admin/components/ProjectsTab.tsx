@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../page.module.scss";
 import { ProjectItem } from "../types";
-import { saveProjects } from "../utils/api";
+import {
+  fetchProjects,
+  createProjects,
+  updateProject,
+  deleteProject,
+} from "../utils/api";
+import Image from "next/image";
+
+/* ── constants ───────────────────────────────────────────── */
 
 const CATEGORIES = [
   "Exterior Facade",
@@ -12,25 +20,64 @@ const CATEGORIES = [
   "Specialized Engineering",
 ];
 
+/* ── helpers ─────────────────────────────────────────────── */
+
 const createProject = (): ProjectItem => ({
   id: crypto.randomUUID(),
+  serverId: undefined,
   title: "",
   category: CATEGORIES[0],
   location: "",
   alt: "",
   imageFile: null,
   imagePreview: "",
+  imageUrl: undefined,
+  isDirty: false,
 });
 
+/** Map a backend document to local state */
+const mapServerProject = (doc: any): ProjectItem => ({
+  id: crypto.randomUUID(),
+  serverId: doc._id,
+  title: doc.title ?? "",
+  category: doc.category ?? CATEGORIES[0],
+  location: doc.location ?? "",
+  alt: doc.alt ?? "",
+  imageFile: null,
+  imagePreview: doc.imageUrl ?? "",
+  imageUrl: doc.imageUrl ?? "",
+  isDirty: false,
+});
+
+/* ── component ───────────────────────────────────────────── */
+
 export default function ProjectsTab() {
-  const [projects, setProjects] = useState<ProjectItem[]>([createProject()]);
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
+  const [deletedServerIds, setDeletedServerIds] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+
+  // ─── Fetch on mount ──────────────────────────────────────
+  useEffect(() => {
+    (async () => {
+      const res = await fetchProjects();
+      if (res.success && Array.isArray(res.data)) {
+        const mapped = res.data.map(mapServerProject);
+        setProjects(mapped.length ? mapped : [createProject()]);
+      } else {
+        setProjects([createProject()]);
+      }
+      setLoading(false);
+    })();
+  }, []);
 
   // ─── Field Updates ───────────────────────────────────────
   const update = (id: string, field: keyof ProjectItem, value: any) => {
     setProjects((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, [field]: value } : p))
+      prev.map((p) =>
+        p.id === id ? { ...p, [field]: value, isDirty: true } : p
+      )
     );
   };
 
@@ -39,7 +86,9 @@ export default function ProjectsTab() {
     const preview = URL.createObjectURL(file);
     setProjects((prev) =>
       prev.map((p) =>
-        p.id === id ? { ...p, imageFile: file, imagePreview: preview } : p
+        p.id === id
+          ? { ...p, imageFile: file, imagePreview: preview, isDirty: true }
+          : p
       )
     );
   };
@@ -48,6 +97,10 @@ export default function ProjectsTab() {
   const addProject = () => setProjects((prev) => [...prev, createProject()]);
 
   const removeProject = (id: string) => {
+    const target = projects.find((p) => p.id === id);
+    if (target?.serverId) {
+      setDeletedServerIds((prev) => [...prev, target.serverId!]);
+    }
     setProjects((prev) => prev.filter((p) => p.id !== id));
   };
 
@@ -56,25 +109,69 @@ export default function ProjectsTab() {
     setSaving(true);
     setMessage("");
 
-    const payload = {
-      items: projects.map((p) => ({
-        title: p.title,
-        category: p.category,
-        location: p.location,
-        alt: p.alt,
-        imageFile: p.imageFile,
-      })),
-    };
+    try {
+      // 1. Delete removed existing projects
+      for (const sid of deletedServerIds) {
+        const res = await deleteProject(sid);
+        if (!res.success) throw new Error(`Delete failed for ${sid}`);
+      }
 
-    const result = await saveProjects(payload);
-    setMessage(
-      result.success ? "Projects saved successfully!" : result.error || "Save failed"
-    );
-    setSaving(false);
-    setTimeout(() => setMessage(""), 4000);
+      // 2. Separate new vs existing-dirty projects
+      const newProjects = projects.filter((p) => !p.serverId);
+      const dirtyExisting = projects.filter((p) => p.serverId && p.isDirty);
+
+      // 3. Bulk-create new projects
+      if (newProjects.length > 0) {
+        const res = await createProjects(
+          newProjects.map((p) => ({
+            title: p.title,
+            category: p.category,
+            location: p.location,
+            alt: p.alt,
+            imageFile: p.imageFile,
+          }))
+        );
+        if (!res.success) throw new Error(res.error || "Create failed");
+      }
+
+      // 4. Patch each modified existing project
+      for (const p of dirtyExisting) {
+        const res = await updateProject(p.serverId!, {
+          title: p.title,
+          category: p.category,
+          location: p.location,
+          alt: p.alt,
+          imageFile: p.imageFile,
+        });
+        if (!res.success)
+          throw new Error(res.error || `Update failed for ${p.serverId}`);
+      }
+
+      // 5. Re-fetch to sync state with server
+      const fetched = await fetchProjects();
+      if (fetched.success && Array.isArray(fetched.data)) {
+        setProjects(fetched.data.map(mapServerProject));
+      }
+
+      setDeletedServerIds([]);
+      setMessage("Projects saved successfully!");
+    } catch (err: any) {
+      setMessage(err.message || "Save failed");
+    } finally {
+      setSaving(false);
+      setTimeout(() => setMessage(""), 4000);
+    }
   };
 
   // ─── Render ──────────────────────────────────────────────
+  if (loading) {
+    return (
+      <div className={styles.tabContent}>
+        <p>Loading projects…</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.tabContent}>
       <div className={styles.tabHeader}>
@@ -110,7 +207,9 @@ export default function ProjectsTab() {
                     <img src={project.imagePreview} alt="Preview" />
                   ) : (
                     <div className={styles.imagePlaceholder}>
-                      <span className="material-symbols-outlined">cloud_upload</span>
+                      <span className="material-symbols-outlined">
+                        cloud_upload
+                      </span>
                       <span>Upload Image</span>
                     </div>
                   )}
@@ -132,7 +231,9 @@ export default function ProjectsTab() {
                   <input
                     type="text"
                     value={project.title}
-                    onChange={(e) => update(project.id, "title", e.target.value)}
+                    onChange={(e) =>
+                      update(project.id, "title", e.target.value)
+                    }
                     placeholder="e.g. The Zenith Plaza"
                   />
                 </div>
@@ -141,7 +242,9 @@ export default function ProjectsTab() {
                   <label>Category</label>
                   <select
                     value={project.category}
-                    onChange={(e) => update(project.id, "category", e.target.value)}
+                    onChange={(e) =>
+                      update(project.id, "category", e.target.value)
+                    }
                   >
                     {CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>
@@ -156,7 +259,9 @@ export default function ProjectsTab() {
                   <input
                     type="text"
                     value={project.location}
-                    onChange={(e) => update(project.id, "location", e.target.value)}
+                    onChange={(e) =>
+                      update(project.id, "location", e.target.value)
+                    }
                     placeholder="e.g. Dubai, UAE"
                   />
                 </div>
@@ -181,7 +286,9 @@ export default function ProjectsTab() {
         {message && (
           <span
             className={`${styles.saveMessage} ${
-              message.includes("success") ? styles.saveSuccess : styles.saveError
+              message.includes("success")
+                ? styles.saveSuccess
+                : styles.saveError
             }`}
           >
             {message}

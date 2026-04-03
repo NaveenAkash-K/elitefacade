@@ -21,6 +21,110 @@ $card-dark: #1f2e1a;
   padding: 0 1.5rem;
 }
 
+// Skeleton animation
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e0e0e0 25%,
+    #f0f0f0 50%,
+    #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+  border-radius: 0.5rem;
+}
+
+.skeletonLine {
+  @extend .skeleton;
+  height: 1rem;
+  width: 100%;
+}
+
+.skeletonStatLabel {
+  height: 1rem;
+  width: 70%;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonStatValue {
+  height: 2.25rem;
+  width: 50%;
+}
+
+.skeletonTitle {
+  height: 1.25rem;
+  width: 80%;
+  margin-bottom: 0.75rem;
+}
+
+.skeletonDesc {
+  height: 0.875rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonDesc2 {
+  height: 0.875rem;
+  width: 60%;
+  margin-bottom: 1rem;
+}
+
+.skeletonTag {
+  height: 0.875rem;
+  width: 50%;
+}
+
+.skeletonClientLogo {
+  height: 2rem;
+  width: 6rem;
+  border-radius: 0.25rem;
+}
+
+// Error & Retry
+.errorState {
+  @include flex-center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #b91c1c;
+
+  .material-symbols-outlined {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    max-width: 28rem;
+  }
+}
+
+.retryBtn {
+  @include flex-center;
+  padding: 0.5rem 1.5rem;
+  background-color: $primary;
+  color: white;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
 // Base Container
 .container {
   background-color: $background-light;
@@ -207,6 +311,7 @@ $card-dark: #1f2e1a;
   box-shadow: 0 25px 50px -12px rgba($primary, 0.3);
   cursor: pointer;
   transition: transform 0.2s;
+  border: none;
 
   &:hover {
     transform: scale(1.05);
@@ -336,6 +441,7 @@ $card-dark: #1f2e1a;
   color: $primary;
   font-weight: 700;
   transition: gap 0.2s;
+  text-decoration: none;
 
   &:hover {
     gap: 0.75rem;
@@ -444,6 +550,7 @@ $card-dark: #1f2e1a;
 
   &:hover {
     filter: grayscale(0);
+    opacity: 1;
   }
 
   img {
@@ -521,6 +628,7 @@ $card-dark: #1f2e1a;
   font-weight: 800;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+  border: none;
   transition: background-color 0.2s;
 
   &:hover {

@@ -7,7 +7,7 @@ export const ASSETS = {
 export const STATS_DATA = [
   { value: "15+", label: "Years of Experience" },
   { value: "500+", label: "Completed Projects" },
-  { value: "24", label: "Global Awards" },
+  { value: "24+", label: "Clients" },
 ];
 
 export const CORE_VALUES = [

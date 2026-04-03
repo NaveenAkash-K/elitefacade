@@ -1,148 +1,162 @@
-import styles from './page.module.scss';
-import { ASSETS } from './assets';
-import Link from "next/link";
+"use client";
+
+import { useMemo, useState } from "react";
+import { useProjects } from "@/hooks/useProjects";
+import Image from "next/image";
+import styles from "./page.module.scss";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+
+const PLACEHOLDER_IMAGE = "/placeholder-project.jpg";
+
+function getImageUrl(image: string): string | null {
+  if (!image) return null;
+  if (image.startsWith("http")) return image;
+  const cleanPath = image.startsWith("/") ? image.slice(1) : image;
+  return `${API_URL}/${cleanPath}`;
+}
+
+function ProjectSkeleton({ height }: { height: string }) {
+  return (
+    <div className={styles.skeletonCard}>
+      <div
+        className={`${styles.skeletonImage} ${styles.skeleton}`}
+        style={{ height }}
+      />
+    </div>
+  );
+}
 
 export default function ProjectsPage() {
+  const {
+    projects,
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    nextPage,
+    prevPage,
+  } = useProjects();
+
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  const skeletons = useMemo(
+    () => [
+      <ProjectSkeleton key={0} height="20rem" />,
+      <ProjectSkeleton key={1} height="16rem" />,
+      <ProjectSkeleton key={2} height="24rem" />,
+      <ProjectSkeleton key={3} height="18rem" />,
+      <ProjectSkeleton key={4} height="22rem" />,
+      <ProjectSkeleton key={5} height="16rem" />,
+    ],
+    []
+  );
+
+  function getProjectImageSrc(projectId: string, image: string): string {
+    if (failedImages.has(projectId)) return PLACEHOLDER_IMAGE;
+    const resolved = getImageUrl(image);
+    if (!resolved) return PLACEHOLDER_IMAGE;
+    return resolved;
+  }
+
   return (
     <div className={styles.container}>
-      {/* Main Content */}
       <main className={styles.main}>
         {/* Hero Header */}
         <div className={styles.heroHeader}>
           <h1 className={styles.pageTitle}>Our Portfolio</h1>
           <p className={styles.pageDescription}>
-            Pioneering the future of architectural envelopes. From high-rise curtain walls to intricate interior glazing, explore our global engineering benchmarks.
+            Pioneering the future of architectural envelopes. From high-rise
+            curtain walls to intricate interior glazing, explore our global
+            engineering benchmarks.
           </p>
         </div>
 
-        {/* Filters Section */}
-        <div className={styles.filtersSection}>
-          <div className={styles.filterTabs}>
-            <button className={styles.filterTabActive}>All Projects</button>
-            <button className={styles.filterTab}>Exterior</button>
-            <button className={styles.filterTab}>Interior</button>
-            <button className={styles.filterTab}>Sustainability</button>
+        {/* Error */}
+        {error && (
+          <div className={styles.errorState}>
+            <span className="material-symbols-outlined">error</span>
+            <p>{error}</p>
+            <button
+              className={styles.retryBtn}
+              onClick={() => window.location.reload()}
+            >
+              Retry
+            </button>
           </div>
-          <div className={styles.sortBy}>
-
-          </div>
-        </div>
+        )}
 
         {/* Masonry Grid */}
         <div className={styles.masonryGrid}>
-          {/* Project 1 */}
-          <div className={styles.projectCard}>
-            <img
-              src={ASSETS.project1}
-              alt="Corporate Tower Facade"
-              className={styles.projectImage}
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Exterior Facade</span>
-              <h3 className={styles.projectTitle}>The Zenith Plaza</h3>
-              <p className={styles.projectLocation}>
-                <span className="material-symbols-outlined">location_on</span> Dubai, UAE
-              </p>
-            </div>
-          </div>
-
-          {/* Project 2 */}
-          <div className={styles.projectCard}>
-            <img
-              src={ASSETS.project2}
-              alt="Minimalist Atrium"
-              className={styles.projectImage}
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Interior Systems</span>
-              <h3 className={styles.projectTitle}>Lumina HQ</h3>
-              <p className={styles.projectLocation}>
-                <span className="material-symbols-outlined">location_on</span> London, UK
-              </p>
-            </div>
-          </div>
-
-          {/* Project 3 */}
-          <div className={styles.projectCard}>
-            <img
-              src={ASSETS.project3}
-              alt="Residential Complex"
-              className={styles.projectImage}
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Exterior Facade</span>
-              <h3 className={styles.projectTitle}>Riverside Terraces</h3>
-              <p className={styles.projectLocation}>
-                <span className="material-symbols-outlined">location_on</span> New York, USA
-              </p>
-            </div>
-          </div>
-
-          {/* Project 4 */}
-          <div className={styles.projectCard}>
-            <img
-              src={ASSETS.project4}
-              alt="Commercial Center"
-              className={styles.projectImage}
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Commercial Glass</span>
-              <h3 className={styles.projectTitle}>Apex Retail Hub</h3>
-              <p className={styles.projectLocation}>
-                <span className="material-symbols-outlined">location_on</span> Singapore
-              </p>
-            </div>
-          </div>
-
-          {/* Project 5 */}
-          <div className={styles.projectCard}>
-            <img
-              src={ASSETS.project5}
-              alt="Modern Lobby"
-              className={styles.projectImage}
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Interior Systems</span>
-              <h3 className={styles.projectTitle}>Azure Hotel Atrium</h3>
-              <p className={styles.projectLocation}>
-                <span className="material-symbols-outlined">location_on</span> Tokyo, Japan
-              </p>
-            </div>
-          </div>
-
-          {/* Project 6 */}
-          <div className={styles.projectCard}>
-            <img
-              src={ASSETS.project6}
-              alt="Art Museum"
-              className={styles.projectImage}
-            />
-            <div className={styles.projectOverlay}>
-              <span className={styles.projectCategory}>Specialized Engineering</span>
-              <h3 className={styles.projectTitle}>Contemporary Arts Pavilion</h3>
-              <p className={styles.projectLocation}>
-                <span className="material-symbols-outlined">location_on</span> Berlin, Germany
-              </p>
-            </div>
-          </div>
+          {loading
+            ? skeletons
+            : projects.map((project) => {
+                const imageSrc = getProjectImageSrc(project.id, project.image);
+                return (
+                  <div key={project.id} className={styles.projectCard}>
+                    <img
+                      src={imageSrc}
+                      alt={project.title || "project"}
+                      className={styles.projectImage}
+                      width={600}
+                      height={400}
+                      style={{ width: "100%", height: "auto" }}
+                      onError={() => {
+                        setFailedImages((prev) => {
+                          const next = new Set(prev);
+                          next.add(project.id);
+                          return next;
+                        });
+                      }}
+                    />
+                    <div className={styles.projectOverlay}>
+                      <span className={styles.projectCategory}>
+                        {project.category}
+                      </span>
+                      <h3 className={styles.projectTitle}>{project.title}</h3>
+                      <p className={styles.projectLocation}>
+                        <span className="material-symbols-outlined">
+                          location_on
+                        </span>
+                        {project.location}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
         </div>
+
+        {/* Empty */}
+        {!loading && !error && projects.length === 0 && (
+          <div className={styles.emptyState}>
+            <span className="material-symbols-outlined">folder_open</span>
+            <h3>No projects found</h3>
+            <p>No projects are available at the moment.</p>
+          </div>
+        )}
 
         {/* Pagination */}
-        <div className={styles.pagination}>
-          <button className={styles.paginationArrow}>
-            <span className="material-symbols-outlined">chevron_left</span>
-          </button>
-          <div className={styles.paginationNumbers}>
-            <button className={styles.paginationActive}>1</button>
-            <button className={styles.paginationNumber}>2</button>
-            <button className={styles.paginationNumber}>3</button>
-            <span className={styles.paginationEllipsis}>...</span>
-            <button className={styles.paginationNumber}>12</button>
+        {!loading && !error && projects.length > 0 && totalPages > 1 && (
+          <div className={styles.pagination}>
+            <button
+              className={styles.paginationArrow}
+              onClick={prevPage}
+              disabled={currentPage <= 1}
+            >
+              <span className="material-symbols-outlined">chevron_left</span>
+            </button>
+            <span className={styles.paginationText}>
+              {currentPage} of {totalPages}
+            </span>
+            <button
+              className={styles.paginationArrow}
+              onClick={nextPage}
+              disabled={currentPage >= totalPages}
+            >
+              <span className="material-symbols-outlined">chevron_right</span>
+            </button>
           </div>
-          <button className={styles.paginationArrow}>
-            <span className="material-symbols-outlined">chevron_right</span>
-          </button>
-        </div>
+        )}
       </main>
     </div>
   );

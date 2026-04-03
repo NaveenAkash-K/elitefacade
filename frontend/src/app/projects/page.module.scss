@@ -386,9 +386,19 @@ $slate-900: #0f172a;
   cursor: pointer;
   transition: background-color 0.2s;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: $slate-100;
   }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.paginationText {
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 
 .paginationNumbers {
@@ -423,6 +433,118 @@ $slate-900: #0f172a;
 
 .paginationEllipsis {
   padding: 0 0.5rem;
+}
+
+// =====================
+// Skeleton Loading State
+// =====================
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $slate-200 25%,
+    darken($slate-200, 5%) 50%,
+    $slate-200 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+.skeletonCard {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: $slate-200;
+}
+
+.skeletonImage {
+  width: 100%;
+}
+
+// =================
+// Error State
+// =================
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1rem;
+
+  .material-symbols-outlined {
+    font-size: 3rem;
+    color: #ef4444;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $slate-500;
+    margin: 0;
+    max-width: 30rem;
+  }
+}
+
+.retryBtn {
+  margin-top: 0.5rem;
+  background-color: $primary;
+  color: white;
+  padding: 0.625rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// =================
+// Empty State
+// =================
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+  gap: 0.75rem;
+
+  .material-symbols-outlined {
+    font-size: 3.5rem;
+    color: $slate-400;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $slate-900;
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: $slate-500;
+    margin: 0;
+    max-width: 24rem;
+  }
 }
 
 // Footer

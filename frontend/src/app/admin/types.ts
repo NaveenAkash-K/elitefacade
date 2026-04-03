@@ -19,48 +19,59 @@ export const ADMIN_TABS: AdminTab[] = [
 
 // ─── Products ──────────────────────────────────────────────
 export interface ProductItem {
-  id: string;
+  id: string;            // local key (crypto.randomUUID)
+  serverId?: string;     // _id from backend — undefined for new items
   title: string;
   description: string;
   badge: string;
   specs: string[];
   imageFile: File | null;
-  imagePreview: string;
+  imagePreview: string;  // blob URL or server imageUrl
+  imageUrl?: string;     // existing server image URL
+  isDirty: boolean;      // true when user edits an existing item
 }
 
 // ─── Projects ──────────────────────────────────────────────
 export interface ProjectItem {
-  id: string;
+  id: string;            // local key (crypto.randomUUID)
+  serverId?: string;     // _id from backend — undefined for new items
   title: string;
   category: string;
   location: string;
   alt: string;
   imageFile: File | null;
-  imagePreview: string;
+  imagePreview: string;  // blob URL or server imageUrl
+  imageUrl?: string;     // existing server image URL
+  isDirty: boolean;      // true when user edits an existing item
 }
 
 // ─── Services ──────────────────────────────────────────────
 export interface RegionItem {
+  serverId?: string;
   icon: string;
   title: string;
   description: string;
 }
 
 export interface PhaseItem {
-  id: string;
+  id: string;            // local key
+  serverId?: string;     // _id from backend
   title: string;
   description: string;
   features: string[];
   imageFile: File | null;
-  imagePreview: string;
+  imagePreview: string;  // blob URL or server imageUrl
+  imageUrl?: string;     // existing server image
 }
 
 export interface StepItem {
+  serverId?: string;
   title: string;
   description: string;
 }
 
 export interface WhyUsItem {
+  serverId?: string;
   icon: string;
   title: string;
   description: string;
@@ -73,20 +84,24 @@ export interface StatItem {
 
 // ─── Fabrication ───────────────────────────────────────────
 export interface FabStatItem {
+  serverId?: string;
   icon: string;
   label: string;
   value: string;
 }
 
 export interface ProductionItem {
-  id: string;
+  id: string;            // local key
+  serverId?: string;     // _id from backend
   title: string;
   alt: string;
   imageFile: File | null;
-  imagePreview: string;
+  imagePreview: string;  // blob URL or server imageUrl
+  imageUrl?: string;     // existing server image
 }
 
 export interface QAFeatureItem {
+  serverId?: string;
   icon: string;
   title: string;
   description: string;
@@ -94,10 +109,15 @@ export interface QAFeatureItem {
 
 // ─── Clients ───────────────────────────────────────────────
 export interface ClientItem {
-  id: string;
-  alt: string;
+  id: string;              // local key (crypto.randomUUID)
+  serverId?: string;       // _id from backend — undefined for new items
+  name: string;            // company name
+  alt: string;             // image alt text
+  showInHomePage: boolean;  // display on homepage carousel
   imageFile: File | null;
-  imagePreview: string;
+  imagePreview: string;    // blob URL or server imageUrl
+  imageUrl?: string;       // existing server image URL
+  isDirty: boolean;        // true when user edits an existing item
 }
 
 // ─── FAQ ───────────────────────────────────────────────────

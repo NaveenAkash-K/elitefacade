@@ -36,7 +36,7 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <span className={styles.logoIcon}>
-              <Image src={logo} alt={""} />
+              <img src={logo} alt={""} width={100}/>
           </span>
           <span className={styles.logoText}>Elite Facade Solutions</span>
         </Link>

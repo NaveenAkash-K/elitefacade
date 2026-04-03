@@ -5,6 +5,10 @@ $charcoal: #1a1a1a;
 $arch-gray: #f8f9fa;
 $border-light: #e9ecef;
 $white: #ffffff;
+$slate-200: #e2e8f0;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+$slate-800: #1e293b;
 
 // Mixins
 @mixin flex-center {
@@ -839,5 +843,154 @@ $white: #ffffff;
     &:hover {
       color: $charcoal;
     }
+  }
+}
+
+// =====================
+// Skeleton Loading State
+// =====================
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $slate-200 25%,
+    darken($slate-200, 5%) 50%,
+    $slate-200 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+.skeletonLine {
+  background: linear-gradient(
+    90deg,
+    $slate-200 25%,
+    darken($slate-200, 5%) 50%,
+    $slate-200 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+  border-radius: 0.25rem;
+}
+
+.skeletonIcon {
+  height: 1.875rem;
+  width: 1.875rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.skeletonStatLabel {
+  height: 0.75rem;
+  width: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonStatValue {
+  height: 1.875rem;
+  width: 70%;
+  margin-top: 0.25rem;
+}
+
+.skeletonProductionImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.skeletonCardTitle {
+  height: 1.125rem;
+  width: 60%;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonCardDesc {
+  height: 0.875rem;
+  width: 100%;
+}
+
+// =================
+// Error State
+// =================
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1rem;
+  width: 100%;
+
+  .material-symbols-outlined {
+    font-size: 3rem;
+    color: #ef4444;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $slate-500;
+    margin: 0;
+    max-width: 30rem;
+  }
+}
+
+.retryBtn {
+  margin-top: 0.5rem;
+  background-color: $primary;
+  color: $white;
+  padding: 0.625rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// =================
+// Empty State
+// =================
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+  gap: 0.75rem;
+  width: 100%;
+
+  .material-symbols-outlined {
+    font-size: 3.5rem;
+    color: $slate-400;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $charcoal;
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: $slate-500;
+    margin: 0;
+    max-width: 24rem;
   }
 }

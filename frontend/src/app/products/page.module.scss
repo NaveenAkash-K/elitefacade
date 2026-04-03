@@ -436,15 +436,157 @@ $slate-950: #020617;
   cursor: pointer;
   transition: all 0.2s;
 
-  &:hover {
+  &:hover:not(:disabled) {
     border-color: $primary;
     color: $primary;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 }
 
 .paginationText {
   font-size: 0.875rem;
   font-weight: 700;
+}
+
+// =====================
+// Skeleton Loading State
+// =====================
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $slate-100 25%,
+    darken($slate-100, 5%) 50%,
+    $slate-100 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+.skeletonLine {
+  background: linear-gradient(
+    90deg,
+    $slate-100 25%,
+    darken($slate-100, 5%) 50%,
+    $slate-100 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+  border-radius: 0.25rem;
+}
+
+.skeletonTitle {
+  height: 1.5rem;
+  width: 75%;
+  margin-bottom: 0.75rem;
+}
+
+.skeletonDesc {
+  height: 1rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.skeletonSpec {
+  height: 0.875rem;
+  width: 60%;
+  margin-bottom: 0.75rem;
+}
+
+.skeletonBtn {
+  height: 2.75rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+}
+
+// =================
+// Error State
+// =================
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1rem;
+
+  .material-symbols-outlined {
+    font-size: 3rem;
+    color: #ef4444;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $text-secondary;
+    margin: 0;
+    max-width: 30rem;
+  }
+}
+
+.retryBtn {
+  margin-top: 0.5rem;
+  background-color: $primary;
+  color: $white;
+  padding: 0.625rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($primary, 0.9);
+  }
+}
+
+// =================
+// Empty State
+// =================
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+  gap: 0.75rem;
+
+  .material-symbols-outlined {
+    font-size: 3.5rem;
+    color: $text-muted;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: $text-secondary;
+    margin: 0 0 0.5rem;
+    max-width: 24rem;
+  }
 }
 
 // Footer

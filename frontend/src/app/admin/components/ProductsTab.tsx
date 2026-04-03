@@ -1,29 +1,74 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../page.module.scss";
 import { ProductItem } from "../types";
-import { saveProducts } from "../utils/api";
+import {
+  fetchProducts,
+  createProducts,
+  updateProduct,
+  deleteProduct,
+} from "../utils/api";
+import Image from "next/image";
+
+/* ── helpers ─────────────────────────────────────────────── */
 
 const createProduct = (): ProductItem => ({
   id: crypto.randomUUID(),
+  serverId: undefined,
   title: "",
   description: "",
   badge: "",
   specs: [""],
   imageFile: null,
   imagePreview: "",
+  imageUrl: undefined,
+  isDirty: false,
 });
 
+/** Map a backend document to local state */
+const mapServerProduct = (doc: any): ProductItem => ({
+  id: crypto.randomUUID(),
+  serverId: doc._id,
+  title: doc.title ?? "",
+  description: doc.description ?? "",
+  badge: doc.badge ?? "",
+  specs: doc.specs?.length ? doc.specs : [""],
+  imageFile: null,
+  imagePreview: doc.imageUrl ?? "",
+  imageUrl: doc.imageUrl ?? "",
+  isDirty: false,
+});
+
+/* ── component ───────────────────────────────────────────── */
+
 export default function ProductsTab() {
-  const [products, setProducts] = useState<ProductItem[]>([createProduct()]);
+  const [products, setProducts] = useState<ProductItem[]>([]);
+  const [deletedServerIds, setDeletedServerIds] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+
+  // ─── Fetch on mount ──────────────────────────────────────
+  useEffect(() => {
+    (async () => {
+      const res = await fetchProducts();
+      if (res.success && Array.isArray(res.data)) {
+        const mapped = res.data.map(mapServerProduct);
+        setProducts(mapped.length ? mapped : [createProduct()]);
+      } else {
+        setProducts([createProduct()]);
+      }
+      setLoading(false);
+    })();
+  }, []);
 
   // ─── Field Updates ───────────────────────────────────────
   const update = (id: string, field: keyof ProductItem, value: any) => {
     setProducts((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, [field]: value } : p))
+      prev.map((p) =>
+        p.id === id ? { ...p, [field]: value, isDirty: true } : p
+      )
     );
   };
 
@@ -32,7 +77,9 @@ export default function ProductsTab() {
     const preview = URL.createObjectURL(file);
     setProducts((prev) =>
       prev.map((p) =>
-        p.id === id ? { ...p, imageFile: file, imagePreview: preview } : p
+        p.id === id
+          ? { ...p, imageFile: file, imagePreview: preview, isDirty: true }
+          : p
       )
     );
   };
@@ -44,7 +91,7 @@ export default function ProductsTab() {
         if (p.id !== id) return p;
         const specs = [...p.specs];
         specs[index] = value;
-        return { ...p, specs };
+        return { ...p, specs, isDirty: true };
       })
     );
   };
@@ -52,7 +99,7 @@ export default function ProductsTab() {
   const addSpec = (id: string) => {
     setProducts((prev) =>
       prev.map((p) =>
-        p.id === id ? { ...p, specs: [...p.specs, ""] } : p
+        p.id === id ? { ...p, specs: [...p.specs, ""], isDirty: true } : p
       )
     );
   };
@@ -61,7 +108,7 @@ export default function ProductsTab() {
     setProducts((prev) =>
       prev.map((p) => {
         if (p.id !== id) return p;
-        return { ...p, specs: p.specs.filter((_, i) => i !== index) };
+        return { ...p, specs: p.specs.filter((_, i) => i !== index), isDirty: true };
       })
     );
   };
@@ -70,6 +117,10 @@ export default function ProductsTab() {
   const addProduct = () => setProducts((prev) => [...prev, createProduct()]);
 
   const removeProduct = (id: string) => {
+    const target = products.find((p) => p.id === id);
+    if (target?.serverId) {
+      setDeletedServerIds((prev) => [...prev, target.serverId!]);
+    }
     setProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
@@ -78,25 +129,64 @@ export default function ProductsTab() {
     setSaving(true);
     setMessage("");
 
-    const payload = {
-      items: products.map((p) => ({
-        title: p.title,
-        description: p.description,
-        badge: p.badge,
-        specs: p.specs.filter((s) => s.trim()),
-        imageFile: p.imageFile,
-      })),
-    };
+    try {
+      // 1. Delete removed existing products
+      for (const sid of deletedServerIds) {
+        const res = await deleteProduct(sid);
+        if (!res.success) throw new Error(`Delete failed for ${sid}`);
+      }
 
-    const result = await saveProducts(payload);
-    setMessage(
-      result.success ? "Products saved successfully!" : result.error || "Save failed"
-    );
-    setSaving(false);
-    setTimeout(() => setMessage(""), 4000);
+      // 2. Separate new vs existing-dirty products
+      const newProducts = products.filter((p) => !p.serverId);
+      const dirtyExisting = products.filter((p) => p.serverId && p.isDirty);
+
+      // 3. Bulk-create new products
+      if (newProducts.length > 0) {
+        const res = await createProducts(
+          newProducts.map((p) => ({
+            title: p.title,
+            description: p.description,
+            badge: p.badge,
+            specs: p.specs.filter((s) => s.trim()),
+            imageFile: p.imageFile,
+          }))
+        );
+        if (!res.success) throw new Error(res.error || "Create failed");
+      }
+
+      // 4. Patch each modified existing product
+      for (const p of dirtyExisting) {
+        const res = await updateProduct(p.serverId!, {
+          title: p.title,
+          description: p.description,
+          badge: p.badge,
+          specs: p.specs.filter((s) => s.trim()),
+          imageFile: p.imageFile,
+        });
+        if (!res.success) throw new Error(res.error || `Update failed for ${p.serverId}`);
+      }
+
+      // 5. Re-fetch to sync state with server
+      const fetched = await fetchProducts();
+      if (fetched.success && Array.isArray(fetched.data)) {
+        setProducts(fetched.data.map(mapServerProduct));
+      }
+
+      setDeletedServerIds([]);
+      setMessage("Products saved successfully!");
+    } catch (err: any) {
+      setMessage(err.message || "Save failed");
+    } finally {
+      setSaving(false);
+      setTimeout(() => setMessage(""), 4000);
+    }
   };
 
   // ─── Render ──────────────────────────────────────────────
+  if (loading) {
+    return <div className={styles.tabContent}><p>Loading products…</p></div>;
+  }
+
   return (
     <div className={styles.tabContent}>
       <div className={styles.tabHeader}>
