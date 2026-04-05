@@ -10,8 +10,8 @@ const {
   deleteProduct,
 } = require('../controllers/productController');
 
-router.get('/', auth, getProducts);
-router.get('/:id', auth, getProduct);
+router.get('/', getProducts);
+router.get('/:id', getProduct);
 router.post('/', auth, upload.any(), createProducts);
 router.patch('/:id', auth, upload.single('image'), updateProduct);
 router.delete('/:id', auth, deleteProduct);

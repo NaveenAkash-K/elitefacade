@@ -11,8 +11,8 @@ const {
   deleteQaFeature,
 } = require('../controllers/fabricationController');
 
-router.get('/', auth, getFabrication);
-router.get('/:type/:id', auth, getFabricationItem);
+router.get('/', getFabrication);
+router.get('/:type/:id', getFabricationItem);
 router.put('/', auth, upload.any(), upsertFabrication);
 router.delete('/stats/:id', auth, deleteStat);
 router.delete('/items/:id', auth, deleteItem);

@@ -12,8 +12,8 @@ const {
   deleteWhyUs,
 } = require('../controllers/serviceController');
 
-router.get('/', auth, getServices);
-router.get('/:type/:id', auth, getServiceItem);
+router.get('/', getServices);
+router.get('/:type/:id', getServiceItem);
 router.put('/', auth, upload.any(), upsertServices);
 router.delete('/regions/:id', auth, deleteRegion);
 router.delete('/phases/:id', auth, deletePhase);

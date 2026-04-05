@@ -10,8 +10,8 @@ const {
   deleteClient,
 } = require('../controllers/clientController');
 
-router.get('/', auth, getClients);
-router.get('/:id', auth, getClient);
+router.get('/', getClients);
+router.get('/:id', getClient);
 router.post('/', auth, upload.any(), createClients);
 router.patch('/:id', auth, upload.single('image'), updateClient);
 router.delete('/:id', auth, deleteClient);

@@ -10,8 +10,8 @@ const {
   deleteProject,
 } = require('../controllers/projectController');
 
-router.get('/', auth, getProjects);
-router.get('/:id', auth, getProject);
+router.get('/', getProjects);
+router.get('/:id', getProject);
 router.post('/', auth, upload.any(), createProjects);
 router.patch('/:id', auth, upload.single('image'), updateProject);
 router.delete('/:id', auth, deleteProject);
