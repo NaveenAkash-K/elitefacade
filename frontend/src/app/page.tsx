@@ -6,9 +6,10 @@ import { useHome } from "@/hooks/useHome";
 import Image from "next/image";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const PLACEHOLDER_IMAGE = "/placeholder-project.jpg";
 
 function getImageUrl(image: string): string {
-  if (!image) return "";
+  if (!image) return PLACEHOLDER_IMAGE;
   if (image.startsWith("http")) return image;
   const cleanPath = image.startsWith("/") ? image.slice(1) : image;
   return `${API_URL}/${cleanPath}`;
@@ -237,14 +238,16 @@ export default function Home() {
                   ? clients.map((client, i) => (
                       <img
                         key={i}
-                        src={
-                          client.imageUrl
-                            ? getImageUrl(client.imageUrl)
-                            : ASSETS.clientLogoA
-                        }
+                        src={getImageUrl(client.imageUrl)}
                         alt={client.name || "Client Logo"}
-                        width={20}
-                        height={20}
+                        style={{ width: "100px", height: "80px" }}
+                        height={100}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          if (target.src !== PLACEHOLDER_IMAGE) {
+                            target.src = PLACEHOLDER_IMAGE;
+                          }
+                        }}
                       />
                     ))
                   : /* Fallback to static logos */

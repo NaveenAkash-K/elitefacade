@@ -4,6 +4,7 @@ import styles from "./page.module.scss";
 import { useClients } from "@/hooks/useClients";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const PLACEHOLDER_IMAGE = "/placeholder-project.jpg";
 
 const STATS_DATA = [
   { value: "500+", label: "Projects Completed" },
@@ -12,7 +13,7 @@ const STATS_DATA = [
 ];
 
 function getImageUrl(image: string): string {
-  if (!image) return "";
+  if (!image) return PLACEHOLDER_IMAGE;
   if (image.startsWith("http")) return image;
   const cleanPath = image.startsWith("/") ? image.slice(1) : image;
   return `${API_URL}/${cleanPath}`;
@@ -59,13 +60,17 @@ export default function ClientsPage() {
                 ))
               : clients.map((client) => (
                   <div key={client.id} className={styles.logoGridItem}>
-                    <div
+                    <img
+                      src={getImageUrl(client.imageUrl)}
+                      alt={client.alt || client.name}
                       className={styles.logoImage}
-                      style={{
-                        backgroundImage: `url('${getImageUrl(client.imageUrl)}')`,
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target.src !== PLACEHOLDER_IMAGE) {
+                          target.src = PLACEHOLDER_IMAGE;
+                        }
                       }}
-                      title={client.alt || client.name}
-                    ></div>
+                    />
                   </div>
                 ))}
           </section>
