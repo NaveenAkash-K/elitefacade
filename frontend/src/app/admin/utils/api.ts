@@ -5,7 +5,7 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 function authHeaders(): Record<string, string> {
-  const token = localStorage.getItem("token") || "";
+  const token = localStorage.getItem("admin_token") || "";
   return { Authorization: `Bearer ${token}` };
 }
 
@@ -38,7 +38,7 @@ async function postFormData(
       });
     }
 
-    const token = sessionStorage.getItem("admin_token");
+    const token = localStorage.getItem("admin_token");
 
     const res = await fetch(`${BASE_URL}${endpoint}`, {
       method: "POST",

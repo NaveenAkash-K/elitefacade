@@ -20,9 +20,9 @@ export default function AdminPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    // const token = sessionStorage.getItem("admin_token");
-    // if (token) setIsAuthenticated(true);
-    setIsAuthenticated(true)
+    const token = localStorage.getItem("admin_token");
+    if (token) setIsAuthenticated(true);
+    // setIsAuthenticated(true)
   }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -33,7 +33,7 @@ export default function AdminPage() {
     const result = await adminLogin(username, password);
 
     if (result.success && result.token) {
-      sessionStorage.setItem("admin_token", result.token);
+      localStorage.setItem("admin_token", result.token);
       setIsAuthenticated(true);
     } else {
       setLoginError(result.error || "Invalid credentials");
@@ -43,7 +43,7 @@ export default function AdminPage() {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("admin_token");
+    localStorage.removeItem("admin_token");
     setIsAuthenticated(false);
     setUsername("");
     setPassword("");
