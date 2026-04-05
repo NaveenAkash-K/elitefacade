@@ -18,11 +18,22 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("admin_token");
     if (token) setIsAuthenticated(true);
-    // setIsAuthenticated(true)
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (mobile) setSidebarOpen(false);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -47,6 +58,11 @@ export default function AdminPage() {
     setIsAuthenticated(false);
     setUsername("");
     setPassword("");
+  };
+
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+    if (isMobile) setSidebarOpen(false);
   };
 
   const renderTab = () => {
@@ -127,10 +143,22 @@ export default function AdminPage() {
   // ─── Dashboard ─────────────────────────────────────────────
   return (
     <div className={styles.adminLayout}>
+      {/* Mobile Overlay */}
+      {isMobile && sidebarOpen && (
+        <div
+          className={`${styles.sidebarOverlay} ${styles.sidebarOverlayVisible}`}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed}`}>
+      <aside
+        className={`${styles.sidebar} ${
+          sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed
+        }`}
+      >
         <div className={styles.sidebarHeader}>
-          {sidebarOpen && (
+          {(sidebarOpen || isMobile) && (
             <div className={styles.sidebarBrand}>
               <h2>Elite Facade</h2>
               <span>Admin CMS</span>
@@ -142,20 +170,26 @@ export default function AdminPage() {
           {ADMIN_TABS.map((tab) => (
             <button
               key={tab.id}
-              className={`${styles.sidebarLink} ${activeTab === tab.id ? styles.sidebarLinkActive : ""}`}
-              onClick={() => setActiveTab(tab.id)}
+              className={`${styles.sidebarLink} ${
+                activeTab === tab.id ? styles.sidebarLinkActive : ""
+              }`}
+              onClick={() => handleTabClick(tab.id)}
               title={tab.label}
             >
               <span className="material-symbols-outlined">{tab.icon}</span>
-              {sidebarOpen && <span>{tab.label}</span>}
+              {(sidebarOpen || isMobile) && <span>{tab.label}</span>}
             </button>
           ))}
         </nav>
 
         <div className={styles.sidebarFooter}>
-          <button className={styles.logoutBtn} onClick={handleLogout} title="Logout">
+          <button
+            className={styles.logoutBtn}
+            onClick={handleLogout}
+            title="Logout"
+          >
             <span className="material-symbols-outlined">logout</span>
-            {sidebarOpen && <span>Logout</span>}
+            {(sidebarOpen || isMobile) && <span>Logout</span>}
           </button>
         </div>
       </aside>
@@ -175,16 +209,16 @@ export default function AdminPage() {
 
           <div className={styles.topBarRight}>
             <div className={styles.adminUser}>
-              <span className="material-symbols-outlined">admin_panel_settings</span>
+              <span className="material-symbols-outlined">
+                admin_panel_settings
+              </span>
               <span>Administrator</span>
             </div>
           </div>
         </header>
 
         {/* Page Content */}
-        <main className={styles.pageContent}>
-          {renderTab()}
-        </main>
+        <main className={styles.pageContent}>{renderTab()}</main>
       </div>
     </div>
   );

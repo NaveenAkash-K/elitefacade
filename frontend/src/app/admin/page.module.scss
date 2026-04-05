@@ -11,6 +11,10 @@
   justify-content: center;
   background: linear-gradient(135deg, $background-dark 0%, darken($background-dark, 5%) 100%);
   padding: $spacing-6;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-4;
+  }
 }
 
 .loginCard {
@@ -20,6 +24,11 @@
   border-radius: $radius-xl;
   padding: $spacing-10;
   box-shadow: $shadow-2xl;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-6;
+    border-radius: $radius-lg;
+  }
 }
 
 .loginHeader {
@@ -36,6 +45,10 @@
   p {
     font-size: $font-size-base;
     color: $text-secondary;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    margin-bottom: $spacing-6;
   }
 }
 
@@ -142,6 +155,26 @@
 
 // ─── Sidebar ───────────────────────────────────────────────
 
+.sidebarOverlay {
+  display: none;
+
+  @media (max-width: $breakpoint-md) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 49;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $transition-medium;
+
+    &.sidebarOverlayVisible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -153,14 +186,32 @@
   top: 0;
   height: 100vh;
   overflow-y: auto;
+
+  @media (max-width: $breakpoint-md) {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transition: transform $transition-medium, width $transition-medium;
+  }
 }
 
 .sidebarOpen {
   width: 260px;
+
+  @media (max-width: $breakpoint-md) {
+    transform: translateX(0);
+  }
 }
 
 .sidebarClosed {
   width: 72px;
+
+  @media (max-width: $breakpoint-md) {
+    width: 260px;
+    transform: translateX(-100%);
+  }
 }
 
 .sidebarHeader {
@@ -296,6 +347,14 @@
   position: sticky;
   top: 0;
   z-index: 40;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-3 $spacing-5;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-3 $spacing-4;
+  }
 }
 
 .menuToggle {
@@ -320,6 +379,10 @@
   display: flex;
   align-items: center;
   gap: $spacing-4;
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $spacing-2;
+  }
 }
 
 .adminUser {
@@ -334,11 +397,27 @@
     font-size: 1.25rem;
     color: $primary;
   }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-size-sm;
+
+    span:last-child {
+      display: none;
+    }
+  }
 }
 
 .pageContent {
   flex: 1;
   padding: $spacing-8;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-5;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-4 $spacing-3;
+  }
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -349,6 +428,10 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-6;
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $spacing-4;
+  }
 }
 
 .tabHeader {
@@ -368,6 +451,19 @@
     font-size: $font-size-base;
     color: $text-secondary;
     margin: $spacing-1 0 0;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    gap: $spacing-3;
+
+    h2 {
+      font-size: $font-size-xl;
+    }
+
+    p {
+      font-size: $font-size-sm;
+    }
   }
 }
 
@@ -393,6 +489,12 @@
   &:hover {
     background: darken($primary, 8%);
   }
+
+  @media (max-width: $breakpoint-sm) {
+    width: 100%;
+    justify-content: center;
+    padding: $spacing-3 $spacing-5;
+  }
 }
 
 // ─── Item Cards ────────────────────────────────────────────
@@ -401,6 +503,10 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-5;
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $spacing-4;
+  }
 }
 
 .itemCard {
@@ -409,6 +515,10 @@
   border-radius: $radius-lg;
   overflow: hidden;
   box-shadow: $shadow-sm;
+
+  @media (max-width: $breakpoint-sm) {
+    border-radius: $radius-md;
+  }
 }
 
 .itemCardHeader {
@@ -424,6 +534,14 @@
     font-weight: $font-weight-bold;
     color: $text-primary;
     margin: 0;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-3 $spacing-4;
+
+    h3 {
+      font-size: $font-size-base;
+    }
   }
 }
 
@@ -459,6 +577,11 @@
   @media (max-width: $breakpoint-md) {
     flex-direction: column;
   }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-4;
+    gap: $spacing-4;
+  }
 }
 
 // ─── Image Upload ──────────────────────────────────────────
@@ -469,6 +592,11 @@
 
   @media (max-width: $breakpoint-md) {
     width: 100%;
+    max-width: 300px;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    max-width: 100%;
   }
 }
 
@@ -523,6 +651,7 @@
 
   @media (max-width: $breakpoint-sm) {
     grid-template-columns: 1fr;
+    gap: $spacing-3;
   }
 }
 
@@ -595,6 +724,7 @@
     border-radius: $radius-md;
     font-size: $font-size-base;
     color: $text-primary;
+    min-width: 0;
 
     &:focus {
       outline: none;
@@ -614,6 +744,7 @@
   background: transparent;
   color: $slate-400;
   cursor: pointer;
+  flex-shrink: 0;
 
   &:hover:not(:disabled) {
     background: rgba(#ef4444, 0.1);
@@ -680,6 +811,10 @@
   border-radius: $radius-lg;
   overflow: hidden;
   box-shadow: $shadow-sm;
+
+  @media (max-width: $breakpoint-sm) {
+    border-radius: $radius-md;
+  }
 }
 
 .subSectionHeader {
@@ -696,6 +831,14 @@
     color: $text-primary;
     margin: 0;
   }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-3 $spacing-4;
+
+    h3 {
+      font-size: $font-size-md;
+    }
+  }
 }
 
 .subSectionBody {
@@ -703,6 +846,11 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-4;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-4;
+    gap: $spacing-3;
+  }
 }
 
 .subSectionAddBtn {
@@ -739,6 +887,11 @@
   border: 1px solid $border-light;
   border-radius: $radius-md;
   background: $slate-50;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-3;
+    gap: $spacing-2;
+  }
 }
 
 .inlineRowFields {
@@ -746,9 +899,11 @@
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: $spacing-3;
+  min-width: 0;
 
   @media (max-width: $breakpoint-sm) {
     grid-template-columns: 1fr;
+    gap: $spacing-2;
   }
 
   input,
@@ -761,6 +916,7 @@
     color: $text-primary;
     background: $white;
     font-family: inherit;
+    min-width: 0;
 
     &:focus {
       outline: none;
@@ -779,9 +935,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: $spacing-3;
+  min-width: 0;
 
   @media (max-width: $breakpoint-sm) {
     grid-template-columns: 1fr;
+    gap: $spacing-2;
   }
 
   input,
@@ -793,6 +951,7 @@
     color: $text-primary;
     background: $white;
     font-family: inherit;
+    min-width: 0;
 
     &:focus {
       outline: none;
@@ -816,6 +975,12 @@
   gap: $spacing-4;
   padding: $spacing-4 0;
   border-top: 1px solid $border-light;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: $spacing-3;
+  }
 }
 
 .saveBtn {
@@ -844,11 +1009,22 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
+
+  @media (max-width: $breakpoint-sm) {
+    justify-content: center;
+    padding: $spacing-3 $spacing-4;
+    width: 100%;
+  }
 }
 
 .saveMessage {
   font-size: $font-size-base;
   font-weight: $font-weight-semibold;
+
+  @media (max-width: $breakpoint-sm) {
+    text-align: center;
+    font-size: $font-size-sm;
+  }
 }
 
 .saveSuccess {
