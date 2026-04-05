@@ -240,7 +240,7 @@ export default function Home() {
                         key={i}
                         src={getImageUrl(client.imageUrl)}
                         alt={client.name || "Client Logo"}
-                        style={{ width: "100px", height: "80px" }}
+                        style={{ width: "250px", height: "150px" }}
                         height={100}
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;

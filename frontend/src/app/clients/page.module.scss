@@ -215,7 +215,6 @@ $slate-900: #0f172a;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
   background-color: white;
   border: 1px solid $slate-100;
   border-radius: 0.75rem;
@@ -232,7 +231,7 @@ $slate-900: #0f172a;
 
 .logoImage {
   width: 100%;
-  height: 6rem;
+  height: 10rem;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
