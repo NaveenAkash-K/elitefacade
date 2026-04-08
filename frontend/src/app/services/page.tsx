@@ -55,10 +55,10 @@ export default function ServicesPage() {
                 global execution.
               </p>
               <div className={styles.heroButtons}>
-                <button className={styles.primaryBtn}>
+                {/* <button className={styles.primaryBtn}>
                   Download Capabilities
                 </button>
-                <button className={styles.secondaryBtn}>Technical Specs</button>
+                <button className={styles.secondaryBtn}>Technical Specs</button> */}
               </div>
             </div>
             <div className={styles.heroImageWrapper}>
@@ -366,12 +366,14 @@ export default function ServicesPage() {
               requirements.
             </p>
             <div className={styles.ctaButtons}>
-              <button className={styles.ctaPrimaryBtn}>
+              {/* <button className={styles.ctaPrimaryBtn}>
                 Schedule Consultation
-              </button>
+              </button> */}
+              <Link href="/contact">
               <button className={styles.ctaSecondaryBtn}>
                 Contact Support
               </button>
+              </Link>
             </div>
           </div>
         </section>

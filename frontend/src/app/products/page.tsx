@@ -138,12 +138,12 @@ export default function ProductsPage() {
                           </li>
                         ))}
                       </ul>
-                      <button className={styles.productBtn}>
+                      {/* <button className={styles.productBtn}>
                         View Technical Details
                         <span className="material-symbols-outlined">
                           arrow_forward
                         </span>
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 );

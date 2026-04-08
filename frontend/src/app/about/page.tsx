@@ -2,6 +2,7 @@
 
 import styles from "./page.module.scss";
 import { useAbout } from "@/hooks/useAbout";
+import Link from "next/link";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
@@ -60,12 +61,14 @@ export default function AboutPage() {
                 Redefining architectural boundaries with precision and
                 innovation since inception. We design the skin of the future.
               </p>
-              <button className={styles.heroButton}>
-                Explore Our Work
-                <span className="material-symbols-outlined">
-                  arrow_forward
-                </span>
-              </button>
+              <Link href="/projects">
+                <button className={styles.heroButton}>
+                    Explore Our Work
+                  <span className="material-symbols-outlined">
+                    arrow_forward
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
         </section>

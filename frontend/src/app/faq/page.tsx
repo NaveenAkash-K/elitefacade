@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from 'react';
-import styles from './page.module.scss';
-import { FAQ_CATEGORIES, FAQ_ITEMS, FOOTER_COMPANY, FOOTER_RESOURCES, FOOTER_CONTACT } from './assets';
+import { useState, useMemo } from "react";
+import styles from "./page.module.scss";
+import {
+  FAQ_CATEGORIES,
+  FAQ_ITEMS,
+} from "./assets";
 import Link from "next/link";
 
 export default function FAQPage() {
+  const [activeCategory, setActiveCategory] = useState<string>("General");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const filteredFAQs = useMemo(
+    () => FAQ_ITEMS.filter((faq) => faq.category === activeCategory),
+    [activeCategory]
+  );
+
+  const handleCategoryChange = (categoryName: string) => {
+    setActiveCategory(categoryName);
+    setOpenIndex(0);
+  };
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -21,7 +35,9 @@ export default function FAQPage() {
             <div className={styles.heroContent}>
               <h2 className={styles.heroTitle}>How can we help?</h2>
               <p className={styles.heroDescription}>
-                Explore our comprehensive resource of frequently asked questions regarding façade engineering, technical specifications, and sustainable building systems.
+                Explore our comprehensive resource of frequently asked questions
+                regarding façade engineering, technical specifications, and
+                sustainable building systems.
               </p>
             </div>
           </section>
@@ -33,26 +49,38 @@ export default function FAQPage() {
                 <nav className={styles.categoryNav}>
                   <p className={styles.categoryLabel}>Categories</p>
                   {FAQ_CATEGORIES.map((category, index) => (
-                    <a
+                    <button
                       key={index}
-                      href="#"
-                      className={`${styles.categoryLink} ${index === 0 ? styles.categoryActive : ''}`}
+                      type="button"
+                      className={`${styles.categoryLink} ${
+                        activeCategory === category.name
+                          ? styles.categoryActive
+                          : ""
+                      }`}
+                      onClick={() => handleCategoryChange(category.name)}
                     >
-                      <span className="material-symbols-outlined">{category.icon}</span>
+                      <span className="material-symbols-outlined">
+                        {category.icon}
+                      </span>
                       {category.name}
-                    </a>
+                    </button>
                   ))}
                 </nav>
 
                 <div className={styles.supportCard}>
-                  <h4 className={styles.supportTitle}>Need Technical Support?</h4>
+                  <h4 className={styles.supportTitle}>Need Support?</h4>
                   <p className={styles.supportDescription}>
-                    Our engineering team is available for detailed consultations regarding your specific project requirements.
+                    Our engineering team is available for detailed consultations
+                    regarding your specific project requirements.
                   </p>
-                  <button className={styles.supportBtn}>
-                    <span className="material-symbols-outlined">engineering</span>
-                    Contact Engineering
-                  </button>
+                  <Link href="/contact">
+                    <button className={styles.supportBtn}>
+                      <span className="material-symbols-outlined">
+                        engineering
+                      </span>
+                      Contact Us
+                    </button>
+                  </Link>
                 </div>
               </div>
             </aside>
@@ -60,9 +88,9 @@ export default function FAQPage() {
             {/* FAQ Section */}
             <section className={styles.faqSection}>
               <div className={styles.faqList}>
-                {FAQ_ITEMS.map((faq, index) => (
+                {filteredFAQs.map((faq, index) => (
                   <details
-                    key={index}
+                    key={`${activeCategory}-${index}`}
                     className={styles.faqItem}
                     open={openIndex === index}
                     onClick={(e) => {
@@ -72,8 +100,14 @@ export default function FAQPage() {
                   >
                     <summary className={styles.faqSummary}>
                       <h3 className={styles.faqQuestion}>{faq.question}</h3>
-                      <div className={`${styles.faqIcon} ${openIndex === index ? styles.faqIconOpen : ''}`}>
-                        <span className="material-symbols-outlined">expand_more</span>
+                      <div
+                        className={`${styles.faqIcon} ${
+                          openIndex === index ? styles.faqIconOpen : ""
+                        }`}
+                      >
+                        <span className="material-symbols-outlined">
+                          expand_more
+                        </span>
                       </div>
                     </summary>
                     <div className={styles.faqContent}>
@@ -81,22 +115,6 @@ export default function FAQPage() {
                     </div>
                   </details>
                 ))}
-              </div>
-
-              {/* Contact Card */}
-              <div className={styles.contactCard}>
-                <div className={styles.contactCardContent}>
-                  <div className={styles.contactCardText}>
-                    <h3 className={styles.contactCardTitle}>Can't find what you're looking for?</h3>
-                    <p className={styles.contactCardDescription}>
-                      Our team is ready to assist with custom technical requests or specific documentation.
-                    </p>
-                  </div>
-                  <div className={styles.contactCardButtons}>
-                    <button className={styles.contactSecondaryBtn}>Email Support</button>
-                    <button className={styles.contactPrimaryBtn}>Open a Ticket</button>
-                  </div>
-                </div>
               </div>
             </section>
           </div>

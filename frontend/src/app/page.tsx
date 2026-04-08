@@ -4,6 +4,7 @@ import styles from './page.module.scss';
 import { ASSETS } from './assets';
 import { useHome } from "@/hooks/useHome";
 import Image from "next/image";
+import Link from "next/link";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 const PLACEHOLDER_IMAGE = "/placeholder-project.jpg";
@@ -55,8 +56,12 @@ export default function Home() {
                 High-end façade engineering solutions for complex corporate structures. Setting the standard in architectural aesthetics and structural performance.
               </p>
               <div className={styles.heroButtons}>
-                <button className={styles.primaryBtn}>View Portfolio</button>
-                <button className={styles.secondaryBtn}>Technical Data</button>
+                <Link href="/projects">
+                  <button className={styles.primaryBtn}>View Portfolio</button>
+                </Link>
+                <Link href="/products">
+                  <button className={styles.secondaryBtn}>Technical Data</button>
+                </Link>
               </div>
             </div>
           </div>

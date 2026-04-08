@@ -50,13 +50,13 @@ export default function FabricationPage() {
               world's most complex façade systems.
             </p>
             <div className={styles.heroButtons}>
-              <button className={styles.heroPrimaryBtn}>
+              {/* <button className={styles.heroPrimaryBtn}>
                 Virtual Tour
                 <span className="material-symbols-outlined">play_circle</span>
               </button>
               <button className={styles.heroSecondaryBtn}>
                 Capabilities Deck
-              </button>
+              </button> */}
             </div>
           </div>
         </section>
@@ -227,7 +227,7 @@ export default function FabricationPage() {
                         </div>
                       ))}
                 </div>
-                <button className={styles.qaButton}>View QA Standards</button>
+                {/* <button className={styles.qaButton}>View QA Standards</button> */}
               </div>
             </div>
           </section>
@@ -255,9 +255,9 @@ export default function FabricationPage() {
               capabilities can optimize your schedule and budget.
             </p>
             <div className={styles.ctaButtons}>
-              <button className={styles.ctaSecondaryBtn}>
+              {/* <button className={styles.ctaSecondaryBtn}>
                 Get a Technical Quote
-              </button>
+              </button> */}
             </div>
           </div>
         </section>

@@ -2,6 +2,7 @@
 
 import styles from "./page.module.scss";
 import { useClients } from "@/hooks/useClients";
+import Link from "next/link";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 const PLACEHOLDER_IMAGE = "/placeholder-project.jpg";
@@ -107,12 +108,14 @@ export default function ClientsPage() {
               partners and benefit from our specialized engineering expertise.
             </p>
             <div className={styles.ctaButtons}>
-              <button className={styles.ctaPrimaryBtn}>
+              {/* <button className={styles.ctaPrimaryBtn}>
                 Contact Partnership Team
-              </button>
-              <button className={styles.ctaSecondaryBtn}>
-                View Project Portfolio
-              </button>
+              </button> */}
+              <Link href="/projects">
+                <button className={styles.ctaSecondaryBtn}>
+                  View Project Portfolio
+                </button>
+              </Link>
             </div>
           </div>
         </section>
