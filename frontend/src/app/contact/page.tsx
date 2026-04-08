@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import axiosInstance from "@/lib/api/axios";
 import styles from "./contact.module.scss";
 
 interface FormData {
@@ -10,6 +11,14 @@ interface FormData {
   subject: string;
   message: string;
 }
+
+const SUBJECT_MAP: Record<string, string> = {
+  general: "General Inquiry",
+  project: "New Project",
+  quote: "Request a Quote",
+  support: "Technical Support",
+  careers: "Careers",
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState<FormData>({
@@ -21,6 +30,7 @@ export default function ContactPage() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -31,12 +41,31 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setSubmitting(false);
-    setSubmitted(true);
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
+    setError(null);
+    setSubmitted(false);
+
+    try {
+      await axiosInstance.post("/contact", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: SUBJECT_MAP[formData.subject] || formData.subject,
+        message: formData.message,
+      });
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err: any) {
+      const msg =
+        err.response?.data?.message ||
+        err.message ||
+        "Something went wrong. Please try again.";
+      setError(msg);
+      setTimeout(() => setError(null), 5000);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -109,6 +138,13 @@ export default function ContactPage() {
               <div className={styles.successMessage}>
                 <span className="material-symbols-outlined">check_circle</span>
                 <p>Thank you! Your message has been sent successfully.</p>
+              </div>
+            )}
+
+            {error && (
+              <div className={styles.errorMessage}>
+                <span className="material-symbols-outlined">error</span>
+                <p>{error}</p>
               </div>
             )}
 
@@ -206,7 +242,7 @@ export default function ContactPage() {
             </form>
           </div>
 
-          {/* Right: Map / Image */}
+          {/* Right: Map */}
           <div className={styles.mapContainer}>
             <iframe
               title="Office Location"

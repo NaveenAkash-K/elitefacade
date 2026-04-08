@@ -180,6 +180,29 @@
   }
 }
 
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  margin-bottom: 1.5rem;
+
+  span {
+    color: #ef4444;
+    font-size: 24px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #991b1b;
+    font-weight: 500;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;

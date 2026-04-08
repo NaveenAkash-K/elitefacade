@@ -4,6 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 import { usePathname } from "next/navigation";
+import logo from "src/asserts/logo.png";
+import Image from 'next/image';
 
 const Footer: React.FC = () => {
   const pathname = usePathname();
@@ -15,9 +17,9 @@ const Footer: React.FC = () => {
         <div className={styles.footerBrand}>
           <div className={styles.footerLogo}>
             <div className={styles.footerLogoIcon}>
-              <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path clipRule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fillRule="evenodd" />
-              </svg>
+              <span className={styles.logoIcon}>
+              <Image src={logo} alt={""} width={100}/>
+          </span>
             </div>
             <span className={styles.footerLogoText}>Elite Facade Solutions</span>
           </div>
