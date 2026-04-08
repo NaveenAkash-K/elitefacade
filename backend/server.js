@@ -18,6 +18,7 @@ app.use('/api/fabrication', require('./routes/fabrication'));
 app.use('/api/clients', require('./routes/clients'));
 app.use('/api/stats', require('./routes/stats'));
 app.use('/api/about', require('./routes/about'));
+app.use('/api/contact', require('./routes/contact'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
