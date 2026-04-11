@@ -210,9 +210,22 @@ export default function ServicesPage() {
               <h2 className={styles.processTitle}>Our Engineering Process</h2>
               <div className={styles.processTimeline}>
                 <div className={styles.timelineLine}>
-                  <div className={styles.timelineProgress}></div>
+                  <div
+                    className={styles.timelineProgress}
+                    style={{
+                      width: `${steps.length > 0 ? 100 : 0}%`,
+                    }}
+                  ></div>
                 </div>
-                <div className={styles.processSteps}>
+                <div
+                  className={styles.processSteps}
+                  style={{
+                    gridTemplateColumns:
+                      steps.length > 0
+                        ? `repeat(${steps.length}, 1fr)`
+                        : undefined,
+                  }}
+                >
                   {loading
                     ? Array.from({ length: 5 }, (_, i) => (
                         <div key={i} className={styles.processStep}>
@@ -231,11 +244,7 @@ export default function ServicesPage() {
                     : steps.map((step, index) => (
                         <div key={step.id} className={styles.processStep}>
                           <div
-                            className={`${styles.stepNumber} ${
-                              index < 3
-                                ? styles.stepActive
-                                : styles.stepInactive
-                            }`}
+                            className={`${styles.stepNumber} ${styles.stepActive}`}
                           >
                             0{index + 1}
                           </div>

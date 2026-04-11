@@ -37,10 +37,10 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
+        {/*<Preloader>{children}</Preloader>*/}
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
-        <Preloader>{children}</Preloader>
       </body>
     </html>
   );
