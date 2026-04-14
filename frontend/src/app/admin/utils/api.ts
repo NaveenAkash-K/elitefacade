@@ -1,75 +1,8 @@
 // ═══════════════════════════════════════════════════════════
-// ADMIN PANEL — API UTILITIES
+// ADMIN PANEL — API UTILITIES (Axios)
 // ═══════════════════════════════════════════════════════════
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
-
-function authHeaders(): Record<string, string> {
-  const token = localStorage.getItem("admin_token") || "";
-  return { Authorization: `Bearer ${token}` };
-}
-
-// ─── Generic POST with FormData ────────────────────────────
-async function postFormData(
-  endpoint: string,
-  data: Record<string, any>
-): Promise<{ success: boolean; error?: string }> {
-  try {
-    const formData = new FormData();
-
-    Object.entries(data).forEach(([key, value]) => {
-      if (value instanceof File) {
-        formData.append(key, value);
-      } else if (Array.isArray(value)) {
-        formData.append(key, JSON.stringify(value));
-      } else if (typeof value === "object" && value !== null) {
-        formData.append(key, JSON.stringify(value));
-      } else {
-        formData.append(key, String(value ?? ""));
-      }
-    });
-
-    // Collect all File objects from nested arrays
-    if (Array.isArray(data.items)) {
-      data.items.forEach((item: any, index: number) => {
-        if (item.imageFile instanceof File) {
-          formData.append(`image_${index}`, item.imageFile);
-        }
-      });
-    }
-
-    const token = localStorage.getItem("admin_token");
-
-    const res = await fetch(`${BASE_URL}${endpoint}`, {
-      method: "POST",
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-      body: formData,
-    });
-
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      return { success: false, error: body.message || `Error ${res.status}` };
-    }
-
-    return { success: true };
-  } catch (err: any) {
-    console.error(`API POST ${endpoint} failed:`, err);
-    return { success: false, error: err.message || "Network error" };
-  }
-}
-
-// ─── Generic GET ───────────────────────────────────────────
-async function fetchJSON(endpoint: string): Promise<any | null> {
-  try {
-    const res = await fetch(`${BASE_URL}${endpoint}`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
-    return null;
-  }
-}
+import axiosInstance from "@/lib/api/axios";
 
 // ─── Auth ──────────────────────────────────────────────────
 export async function adminLogin(
@@ -77,32 +10,22 @@ export async function adminLogin(
   password: string
 ): Promise<{ success: boolean; token?: string; error?: string }> {
   try {
-    const res = await fetch(`${BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+    const { data } = await axiosInstance.post("/auth/login", {
+      username,
+      password,
     });
-
-    const body = await res.json().catch(() => ({}));
-
-    if (!res.ok) {
-      return { success: false, error: body.message || "Invalid credentials" };
-    }
-
-    return { success: true, token: body.token };
+    return { success: true, token: data.token };
   } catch (err: any) {
-    return { success: false, error: err.message || "Network error" };
+    const message =
+      err.response?.data?.message || err.message || "Invalid credentials";
+    return { success: false, error: message };
   }
 }
 
 // ─── Products ──────────────────────────────────────────────
 export async function fetchProducts() {
   try {
-    const res = await fetch(`${BASE_URL}/products`, {
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-    const data = await res.json();
+    const { data } = await axiosInstance.get("/products");
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -120,7 +43,6 @@ export async function createProducts(
 ) {
   try {
     const fd = new FormData();
-
     const jsonItems = items.map(({ imageFile, ...rest }) => rest);
     fd.append("items", JSON.stringify(jsonItems));
 
@@ -130,14 +52,9 @@ export async function createProducts(
       }
     });
 
-    const res = await fetch(`${BASE_URL}/products`, {
-      method: "POST",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.post("/products", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`POST failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -165,14 +82,9 @@ export async function updateProduct(
       fd.append("image", fields.imageFile);
     }
 
-    const res = await fetch(`${BASE_URL}/products/${id}`, {
-      method: "PATCH",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.patch(`/products/${id}`, fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`PATCH failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -181,11 +93,7 @@ export async function updateProduct(
 
 export async function deleteProduct(id: string) {
   try {
-    const res = await fetch(`${BASE_URL}/products/${id}`, {
-      method: "DELETE",
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`DELETE failed: ${res.status}`);
+    await axiosInstance.delete(`/products/${id}`);
     return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -193,14 +101,9 @@ export async function deleteProduct(id: string) {
 }
 
 // ─── Projects ──────────────────────────────────────────────
-
 export async function fetchProjects() {
   try {
-    const res = await fetch(`${BASE_URL}/projects`, {
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-    const data = await res.json();
+    const { data } = await axiosInstance.get("/projects");
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -218,26 +121,18 @@ export async function createProjects(
 ) {
   try {
     const fd = new FormData();
-
-    // JSON array of metadata (without imageFile)
     const jsonItems = items.map(({ imageFile, ...rest }) => rest);
     fd.append("items", JSON.stringify(jsonItems));
 
-    // Attach each image as image_0, image_1 …
     items.forEach((item, i) => {
       if (item.imageFile) {
         fd.append(`image_${i}`, item.imageFile);
       }
     });
 
-    const res = await fetch(`${BASE_URL}/projects`, {
-      method: "POST",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.post("/projects", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`POST failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -265,14 +160,9 @@ export async function updateProject(
       fd.append("image", fields.imageFile);
     }
 
-    const res = await fetch(`${BASE_URL}/projects/${id}`, {
-      method: "PATCH",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.patch(`/projects/${id}`, fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`PATCH failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -281,11 +171,7 @@ export async function updateProject(
 
 export async function deleteProject(id: string) {
   try {
-    const res = await fetch(`${BASE_URL}/projects/${id}`, {
-      method: "DELETE",
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`DELETE failed: ${res.status}`);
+    await axiosInstance.delete(`/projects/${id}`);
     return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -293,14 +179,9 @@ export async function deleteProject(id: string) {
 }
 
 // ─── Services ──────────────────────────────────────────────
-
 export async function fetchServices() {
   try {
-    const res = await fetch(`${BASE_URL}/services`, {
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-    const data = await res.json();
+    const { data } = await axiosInstance.get("/services");
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -325,14 +206,9 @@ export async function upsertServices(payload: {
       fd.append(`image_${index}`, file);
     });
 
-    const res = await fetch(`${BASE_URL}/services`, {
-      method: "PUT",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.put("/services", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`PUT failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -340,14 +216,9 @@ export async function upsertServices(payload: {
 }
 
 // ─── Fabrication ───────────────────────────────────────────
-
 export async function fetchFabrication() {
   try {
-    const res = await fetch(`${BASE_URL}/fabrication`, {
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-    const data = await res.json();
+    const { data } = await axiosInstance.get("/fabrication");
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -370,14 +241,9 @@ export async function upsertFabrication(payload: {
       fd.append(`image_${index}`, file);
     });
 
-    const res = await fetch(`${BASE_URL}/fabrication`, {
-      method: "PUT",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.put("/fabrication", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`PUT failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -385,14 +251,9 @@ export async function upsertFabrication(payload: {
 }
 
 // ─── Clients ───────────────────────────────────────────────
-
 export async function fetchClients() {
   try {
-    const res = await fetch(`${BASE_URL}/clients`, {
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-    const data = await res.json();
+    const { data } = await axiosInstance.get("/clients");
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -409,7 +270,6 @@ export async function createClients(
 ) {
   try {
     const fd = new FormData();
-
     const jsonItems = items.map(({ imageFile, ...rest }) => rest);
     fd.append("items", JSON.stringify(jsonItems));
 
@@ -419,14 +279,9 @@ export async function createClients(
       }
     });
 
-    const res = await fetch(`${BASE_URL}/clients`, {
-      method: "POST",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.post("/clients", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`POST failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -452,14 +307,9 @@ export async function updateClient(
       fd.append("image", fields.imageFile);
     }
 
-    const res = await fetch(`${BASE_URL}/clients/${id}`, {
-      method: "PATCH",
-      headers: authHeaders(),
-      body: fd,
+    const { data } = await axiosInstance.patch(`/clients/${id}`, fd, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (!res.ok) throw new Error(`PATCH failed: ${res.status}`);
-    const data = await res.json();
     return { success: true, data };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -468,11 +318,7 @@ export async function updateClient(
 
 export async function deleteClient(id: string) {
   try {
-    const res = await fetch(`${BASE_URL}/clients/${id}`, {
-      method: "DELETE",
-      headers: authHeaders(),
-    });
-    if (!res.ok) throw new Error(`DELETE failed: ${res.status}`);
+    await axiosInstance.delete(`/clients/${id}`);
     return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message };
@@ -480,9 +326,73 @@ export async function deleteClient(id: string) {
 }
 
 // ─── FAQ ───────────────────────────────────────────────────
-export const saveFAQ = (data: any) => postFormData("/faq", data);
-export const fetchFAQ = () => fetchJSON("/faq");
+export async function saveFAQ(data: any) {
+  try {
+    const fd = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      if (value instanceof File) {
+        fd.append(key, value);
+      } else if (Array.isArray(value)) {
+        fd.append(key, JSON.stringify(value));
+      } else if (typeof value === "object" && value !== null) {
+        fd.append(key, JSON.stringify(value));
+      } else {
+        fd.append(key, String(value ?? ""));
+      }
+    });
+
+    await axiosInstance.post("/faq", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return { success: true };
+  } catch (err: any) {
+    const message =
+      err.response?.data?.message || err.message || "Network error";
+    return { success: false, error: message };
+  }
+}
+
+export async function fetchFAQ() {
+  try {
+    const { data } = await axiosInstance.get("/faq");
+    return data;
+  } catch {
+    return null;
+  }
+}
 
 // ─── About ─────────────────────────────────────────────────
-export const saveAbout = (data: any) => postFormData("/about", data);
-export const fetchAbout = () => fetchJSON("/about");
+export async function saveAbout(data: any) {
+  try {
+    const fd = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      if (value instanceof File) {
+        fd.append(key, value);
+      } else if (Array.isArray(value)) {
+        fd.append(key, JSON.stringify(value));
+      } else if (typeof value === "object" && value !== null) {
+        fd.append(key, JSON.stringify(value));
+      } else {
+        fd.append(key, String(value ?? ""));
+      }
+    });
+
+    await axiosInstance.post("/about", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return { success: true };
+  } catch (err: any) {
+    const message =
+      err.response?.data?.message || err.message || "Network error";
+    return { success: false, error: message };
+  }
+}
+
+export async function fetchAbout() {
+  try {
+    const { data } = await axiosInstance.get("/about");
+    return data;
+  } catch {
+    return null;
+  }
+}

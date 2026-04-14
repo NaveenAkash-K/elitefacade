@@ -15,7 +15,7 @@ export function useAuth() {
     setError(null);
     try {
       const response = await authApi.login(payload);
-      localStorage.setItem("token", response.token);
+      localStorage.setItem("admin_token", response.token);
       router.push("/admin");
       return response;
     } catch (err: unknown) {

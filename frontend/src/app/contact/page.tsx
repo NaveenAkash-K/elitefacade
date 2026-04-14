@@ -91,8 +91,7 @@ export default function ContactPage() {
               <span className="material-symbols-outlined">location_on</span>
             </div>
             <h3>Our Office</h3>
-            <p>1234 Engineering Boulevard</p>
-            <p>Suite 500, Dubai, UAE</p>
+            <p>Elite Solutions, 140/2B, Anna Industrial Estate, Mettukuppam Road, Porur Garden Phase II, Odamangar, Vanagaram, Chennai - 600095</p>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.infoIcon}>
@@ -246,7 +245,7 @@ export default function ContactPage() {
           <div className={styles.mapContainer}>
             <iframe
               title="Office Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.168!2d55.2708!3d25.2048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDEyJzE3LjMiTiA1NcKwMTYnMTUuMCJF!5e0!3m2!1sen!2sae!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.8128808835895!2d80.1581058!3d13.0475796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52610060df5007%3A0xa4a2372029bfa237!2sElite%20facade%20solutions!5e0!3m2!1sen!2sin!4v1776190270201!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0, borderRadius: "16px" }}

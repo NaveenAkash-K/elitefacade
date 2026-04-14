@@ -787,3 +787,130 @@ $card-dark: #1f2e1a;
     }
   }
 }
+
+// Location Section
+.location {
+  padding: 6rem 0;
+  background-color: white;
+  overflow: hidden;
+}
+
+.locationInner {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.locationContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.locationDescription {
+  color: #6b7280;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: 32rem;
+}
+
+.locationBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba($primary, 0.08);
+  border: 1px solid rgba($primary, 0.2);
+  color: $primary;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: fit-content;
+
+  .material-symbols-outlined {
+    font-size: 1rem;
+  }
+}
+
+.locationMapWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.locationMapGlow {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(white, 0.08) 0%, transparent 100%);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  transition: background 0.5s ease;
+}
+
+.locationMapContainer {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 4800px;
+  cursor: none;
+
+  &.revealing {
+    .locationMapColored {
+      opacity: 1;
+    }
+
+    ~ .locationMapGlow {
+      background: radial-gradient(circle, rgba($primary, 0.15) 0%, transparent 70%);
+    }
+  }
+}
+
+.locationMapImage {
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.08));
+}
+
+.locationMapGrayscale {
+  position: relative;
+  display: block;
+}
+
+.locationMapColored {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+
+  // Spotlight mask that follows the cursor
+  -webkit-mask-image: radial-gradient(
+    circle 150px at var(--mouse-x) var(--mouse-y),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  mask-image: radial-gradient(
+    circle 150px at var(--mouse-x) var(--mouse-y),
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 0.6) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}

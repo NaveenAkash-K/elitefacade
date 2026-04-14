@@ -5,6 +5,9 @@ import { ASSETS } from './assets';
 import { useHome } from "@/hooks/useHome";
 import Image from "next/image";
 import Link from "next/link";
+import IndiaMapColored from "@/asserts/Iconic landmarks of India map (1).png";
+import IndiaMap from "@/asserts/imgonline-com-ua-ReplaceColor-SS4o7e1AUn.png";
+import { useRef, useCallback } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 const PLACEHOLDER_IMAGE = "/placeholder-project.jpg";
@@ -18,6 +21,25 @@ function getImageUrl(image: string): string {
 
 export default function Home() {
   const { stats, products, clients, loading, error, refetch } = useHome();
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const container = mapContainerRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    container.style.setProperty("--mouse-x", `${x}px`);
+    container.style.setProperty("--mouse-y", `${y}px`);
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    mapContainerRef.current?.classList.add(styles.revealing);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    mapContainerRef.current?.classList.remove(styles.revealing);
+  }, []);
 
   const STATS_DATA = [
     {
@@ -41,234 +63,210 @@ export default function Home() {
   ];
 
   return (
-    <div className={styles.container}>
-      {/* Main Content */}
-      <main>
-        {/* Hero Section */}
-        <section className={styles.hero} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%), url("${ASSETS.heroBackground}")` }}>
-          <div className={styles.heroContent}>
-            <div className={styles.heroTextWrapper}>
-              <span className={styles.heroBadge}>Global Engineering Excellence</span>
-              <h1 className={styles.heroTitle}>
-                Precision Engineering for <span className={styles.highlight}>Iconic</span> Façades
-              </h1>
-              <p className={styles.heroDescription}>
-                High-end façade engineering solutions for complex corporate structures. Setting the standard in architectural aesthetics and structural performance.
-              </p>
-              <div className={styles.heroButtons}>
-                <Link href="/projects">
-                  <button className={styles.primaryBtn}>View Portfolio</button>
-                </Link>
-                <Link href="/products">
-                  <button className={styles.secondaryBtn}>Technical Data</button>
-                </Link>
+      <div className={styles.container}>
+        <main>
+          {/* Hero Section */}
+          <section className={styles.hero} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%), url("${ASSETS.heroBackground}")` }}>
+            <div className={styles.heroContent}>
+              <div className={styles.heroTextWrapper}>
+                <span className={styles.heroBadge}>Global Engineering Excellence</span>
+                <h1 className={styles.heroTitle}>
+                  Precision Engineering for <span className={styles.highlight}>Iconic</span> Façades
+                </h1>
+                <p className={styles.heroDescription}>
+                  High-end façade engineering solutions for complex corporate structures. Setting the standard in architectural aesthetics and structural performance.
+                </p>
+                <div className={styles.heroButtons}>
+                  <Link href="/projects">
+                    <button className={styles.primaryBtn}>View Portfolio</button>
+                  </Link>
+                  <Link href="/products">
+                    <button className={styles.secondaryBtn}>Technical Data</button>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Error State */}
-        {error && !loading && (
-          <div className={styles.errorState}>
-            <span className="material-symbols-outlined">error</span>
-            <p>{error}</p>
-            <button className={styles.retryBtn} onClick={refetch}>
-              Retry
-            </button>
-          </div>
-        )}
-
-        {/* Stats Section */}
-        <section className={styles.stats}>
-          <div className={styles.statsInner}>
-            <div className={styles.statsGrid}>
-              {loading
-                ? Array.from({ length: 3 }, (_, i) => (
-                    <div key={i} className={styles.statCard}>
-                      <div className={styles.statIcon}>
-                        <span className="material-symbols-outlined">
-                          hourglass_empty
-                        </span>
-                      </div>
-                      <div
-                        className={`${styles.skeletonLine} ${styles.skeletonStatLabel}`}
-                      />
-                      <div
-                        className={`${styles.skeletonLine} ${styles.skeletonStatValue}`}
-                      />
-                    </div>
-                  ))
-                : STATS_DATA.map((stat, i) => (
-                    <div key={i} className={styles.statCard}>
-                      <div className={styles.statIcon}>
-                        <span className="material-symbols-outlined">
-                          {stat.icon}
-                        </span>
-                      </div>
-                      <p className={styles.statLabel}>{stat.label}</p>
-                      <p className={styles.statValue}>
-                        {stat.value || stat.fallback}
-                      </p>
-                    </div>
-                  ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Expertise Section */}
-        <section className={styles.expertise}>
-          <div className={styles.expertiseInner}>
-            <div className={styles.expertiseHeader}>
-              <div>
-                <h2 className={styles.sectionSubtitle}>Our Expertise</h2>
-                <h3 className={styles.sectionTitle}>Engineered Solutions</h3>
+          {/* Error State */}
+          {error && !loading && (
+              <div className={styles.errorState}>
+                <span className="material-symbols-outlined">error</span>
+                <p>{error}</p>
+                <button className={styles.retryBtn} onClick={refetch}>
+                  Retry
+                </button>
               </div>
-              <a href="/products" className={styles.exploreLink}>
-                Explore all products <span className="material-symbols-outlined">arrow_forward</span>
-              </a>
-            </div>
+          )}
 
-            <div className={styles.expertiseGrid}>
-              {loading
-                ? Array.from({ length: 3 }, (_, i) => (
-                    <div key={i} className={styles.expertiseCard}>
-                      <div
-                        className={`${styles.expertiseImage} ${styles.skeleton}`}
-                      />
-                      <div className={styles.expertiseContent}>
-                        <div
-                          className={`${styles.skeletonLine} ${styles.skeletonTitle}`}
-                        />
-                        <div
-                          className={`${styles.skeletonLine} ${styles.skeletonDesc}`}
-                        />
-                        <div
-                          className={`${styles.skeletonLine} ${styles.skeletonDesc2}`}
-                        />
-                        <div
-                          className={`${styles.skeletonLine} ${styles.skeletonTag}`}
-                        />
-                      </div>
-                    </div>
-                  ))
-                : products.length > 0
-                  ? products.slice(0, 3).map((product, i) => (
-                      <div key={i} className={styles.expertiseCard}>
-                        <div
-                          className={styles.expertiseImage}
-                          style={{
-                            backgroundImage: `url("${
-                              product.image
-                                ? getImageUrl(product.image)
-                                : ASSETS.curtainWall
-                            }")`,
-                          }}
-                        />
-                        <div className={styles.expertiseContent}>
-                          <h4 className={styles.expertiseTitle}>
-                            {product.title}
-                          </h4>
-                          <p className={styles.expertiseDescription}>
-                            {product.description}
-                          </p>
-                          {product && (
-                            <span className={styles.expertiseTag}>
-                              {product.badge}
-                            </span>
-                          )}
+          {/* Stats Section */}
+          <section className={styles.stats}>
+            <div className={styles.statsInner}>
+              <div className={styles.statsGrid}>
+                {loading
+                    ? Array.from({ length: 3 }, (_, i) => (
+                        <div key={i} className={styles.statCard}>
+                          <div className={styles.statIcon}>
+                            <span className="material-symbols-outlined">hourglass_empty</span>
+                          </div>
+                          <div className={`${styles.skeletonLine} ${styles.skeletonStatLabel}`} />
+                          <div className={`${styles.skeletonLine} ${styles.skeletonStatValue}`} />
                         </div>
-                      </div>
                     ))
-                  : /* Fallback to static content if no products from API */
-                    [
-                      {
-                        image: ASSETS.curtainWall,
-                        title: "Curtain Wall Systems",
-                        description:
-                          "Innovative thermal break technology designed for peak energy efficiency in high-rise constructions.",
-                        tag: "Thermal Performance Optimization",
-                      },
-                      {
-                        image: ASSETS.unitizedFacade,
-                        title: "Unitized Façades",
-                        description:
-                          "Precision-engineered pre-assembled units for rapid onsite installation and superior quality control.",
-                        tag: "Rapid Installation Engineering",
-                      },
-                      {
-                        image: ASSETS.structuralGlass,
-                        title: "Structural Glass",
-                        description:
-                          "Architectural aesthetics meets load-bearing strength with our advanced structural glazing systems.",
-                        tag: "Seamless Architectural Aesthetics",
-                      },
-                    ].map((item, i) => (
-                      <div key={i} className={styles.expertiseCard}>
-                        <div
-                          className={styles.expertiseImage}
-                          style={{
-                            backgroundImage: `url("${item.image}")`,
-                          }}
-                        />
-                        <div className={styles.expertiseContent}>
-                          <h4 className={styles.expertiseTitle}>
-                            {item.title}
-                          </h4>
-                          <p className={styles.expertiseDescription}>
-                            {item.description}
-                          </p>
-                          <span className={styles.expertiseTag}>
-                            {item.tag}
-                          </span>
+                    : STATS_DATA.map((stat, i) => (
+                        <div key={i} className={styles.statCard}>
+                          <div className={styles.statIcon}>
+                            <span className="material-symbols-outlined">{stat.icon}</span>
+                          </div>
+                          <p className={styles.statLabel}>{stat.label}</p>
+                          <p className={styles.statValue}>{stat.value || stat.fallback}</p>
                         </div>
-                      </div>
                     ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Clients Section */}
-        <section className={styles.clients}>
-          <div className={styles.clientsInner}>
-            <p className={styles.clientsTitle}>Trusted by Industry Leaders</p>
-            <div className={styles.clientsLogos}>
-              {loading
-                ? Array.from({ length: 5 }, (_, i) => (
-                    <div
-                      key={i}
-                      className={`${styles.skeletonClientLogo} ${styles.skeleton}`}
-                    />
-                  ))
-                : clients.length > 0
-                  ? clients.map((client, i) => (
-                      <img
-                        key={i}
-                        src={getImageUrl(client.imageUrl)}
-                        alt={client.name || "Client Logo"}
-                        style={{ width: "250px", height: "150px" }}
-                        height={100}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          if (target.src !== PLACEHOLDER_IMAGE) {
-                            target.src = PLACEHOLDER_IMAGE;
-                          }
-                        }}
-                      />
+          {/* Expertise Section */}
+          <section className={styles.expertise}>
+            <div className={styles.expertiseInner}>
+              <div className={styles.expertiseHeader}>
+                <div>
+                  <h2 className={styles.sectionSubtitle}>Our Expertise</h2>
+                  <h3 className={styles.sectionTitle}>Engineered Solutions</h3>
+                </div>
+                <a href="/products" className={styles.exploreLink}>
+                  Explore all products <span className="material-symbols-outlined">arrow_forward</span>
+                </a>
+              </div>
+
+              <div className={styles.expertiseGrid}>
+                {loading
+                    ? Array.from({ length: 3 }, (_, i) => (
+                        <div key={i} className={styles.expertiseCard}>
+                          <div className={`${styles.expertiseImage} ${styles.skeleton}`} />
+                          <div className={styles.expertiseContent}>
+                            <div className={`${styles.skeletonLine} ${styles.skeletonTitle}`} />
+                            <div className={`${styles.skeletonLine} ${styles.skeletonDesc}`} />
+                            <div className={`${styles.skeletonLine} ${styles.skeletonDesc2}`} />
+                            <div className={`${styles.skeletonLine} ${styles.skeletonTag}`} />
+                          </div>
+                        </div>
                     ))
-                  : /* Fallback to static logos */
-                    [
-                      { src: ASSETS.clientLogoA, alt: "Client Logo A" },
-                      { src: ASSETS.clientLogoB, alt: "Client Logo B" },
-                      { src: ASSETS.clientLogoC, alt: "Client Logo C" },
-                      { src: ASSETS.clientLogoD, alt: "Client Logo D" },
-                      { src: ASSETS.clientLogoE, alt: "Client Logo E" },
-                    ].map((logo, i) => (
-                      <Image key={i} src={logo.src} alt={logo.alt} width={20} height={20}/>
-                    ))}
+                    : products.length > 0
+                        ? products.slice(0, 3).map((product, i) => (
+                            <div key={i} className={styles.expertiseCard}>
+                              <div
+                                  className={styles.expertiseImage}
+                                  style={{
+                                    backgroundImage: `url("${product.image ? getImageUrl(product.image) : ASSETS.curtainWall}")`,
+                                  }}
+                              />
+                              <div className={styles.expertiseContent}>
+                                <h4 className={styles.expertiseTitle}>{product.title}</h4>
+                                <p className={styles.expertiseDescription}>{product.description}</p>
+                                {product && <span className={styles.expertiseTag}>{product.badge}</span>}
+                              </div>
+                            </div>
+                        ))
+                        : [
+                          { image: ASSETS.curtainWall, title: "Curtain Wall Systems", description: "Innovative thermal break technology designed for peak energy efficiency in high-rise constructions.", tag: "Thermal Performance Optimization" },
+                          { image: ASSETS.unitizedFacade, title: "Unitized Façades", description: "Precision-engineered pre-assembled units for rapid onsite installation and superior quality control.", tag: "Rapid Installation Engineering" },
+                          { image: ASSETS.structuralGlass, title: "Structural Glass", description: "Architectural aesthetics meets load-bearing strength with our advanced structural glazing systems.", tag: "Seamless Architectural Aesthetics" },
+                        ].map((item, i) => (
+                            <div key={i} className={styles.expertiseCard}>
+                              <div className={styles.expertiseImage} style={{ backgroundImage: `url("${item.image}")` }} />
+                              <div className={styles.expertiseContent}>
+                                <h4 className={styles.expertiseTitle}>{item.title}</h4>
+                                <p className={styles.expertiseDescription}>{item.description}</p>
+                                <span className={styles.expertiseTag}>{item.tag}</span>
+                              </div>
+                            </div>
+                        ))}
+              </div>
             </div>
-          </div>
-        </section>
-      </main>
-    </div>
+          </section>
+
+          {/* Clients Section */}
+          <section className={styles.clients}>
+            <div className={styles.clientsInner}>
+              <p className={styles.clientsTitle}>Trusted by Industry Leaders</p>
+              <div className={styles.clientsLogos}>
+                {loading
+                    ? Array.from({ length: 5 }, (_, i) => (
+                        <div key={i} className={`${styles.skeletonClientLogo} ${styles.skeleton}`} />
+                    ))
+                    : clients.length > 0
+                        ? clients.map((client, i) => (
+                            <img
+                                key={i}
+                                src={getImageUrl(client.imageUrl)}
+                                alt={client.name || "Client Logo"}
+                                style={{ width: "250px", height: "150px" }}
+                                height={100}
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  if (target.src !== PLACEHOLDER_IMAGE) target.src = PLACEHOLDER_IMAGE;
+                                }}
+                            />
+                        ))
+                        : [
+                          { src: ASSETS.clientLogoA, alt: "Client Logo A" },
+                          { src: ASSETS.clientLogoB, alt: "Client Logo B" },
+                          { src: ASSETS.clientLogoC, alt: "Client Logo C" },
+                          { src: ASSETS.clientLogoD, alt: "Client Logo D" },
+                          { src: ASSETS.clientLogoE, alt: "Client Logo E" },
+                        ].map((logo, i) => (
+                            <Image key={i} src={logo.src} alt={logo.alt} width={20} height={20} />
+                        ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Location Section */}
+          <section className={styles.location}>
+            <div className={styles.locationInner}>
+              <div className={styles.locationContent}>
+                <h2 className={styles.sectionSubtitle}>Our Presence</h2>
+                <h3 className={styles.sectionTitle}>Delivering Excellence Across India</h3>
+                <p className={styles.locationDescription}>
+                  From metropolitan skylines to emerging commercial hubs, our facade engineering expertise spans the length and breadth of India — ensuring world-class execution wherever your project stands.
+                </p>
+                <div className={styles.locationBadge}>
+                  <span className="material-symbols-outlined">verified</span>
+                  Pan-India Operations &amp; Support
+                </div>
+              </div>
+
+              <div className={styles.locationMapWrapper}>
+                <div className={styles.locationMapGlow} />
+                <div
+                    ref={mapContainerRef}
+                    className={styles.locationMapContainer}
+                    onMouseMove={handleMouseMove}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                  <Image
+                      src={IndiaMap}
+                      alt="Map of India with iconic landmarks in grayscale"
+                      width={480}
+                      height={560}
+                      className={`${styles.locationMapImage} ${styles.locationMapGrayscale}`}
+                      priority={false}
+                  />
+                  <Image
+                      src={IndiaMapColored}
+                      alt="Map of India with iconic landmarks in vibrant color"
+                      width={480}
+                      height={560}
+                      className={`${styles.locationMapImage} ${styles.locationMapColored}`}
+                      priority={false}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
   );
 }

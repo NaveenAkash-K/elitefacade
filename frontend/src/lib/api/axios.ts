@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       if (typeof window !== "undefined") {
         localStorage.removeItem("admin_token");
-        window.location.href = "/admin/login";
+        window.location.href = "/admin";
       }
     }
     return Promise.reject(error);
