@@ -40,6 +40,9 @@ const Header: React.FC = () => {
           </span>
           <span className={styles.logoText}>Elite Facade Solutions</span>
         </Link>
+        <div className={styles.companyName}>
+          Elite Facade Solutions
+        </div>
 
         {/* Desktop Navigation */}
         <nav className={styles.desktopNav}>
