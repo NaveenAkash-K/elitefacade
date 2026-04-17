@@ -234,38 +234,38 @@ export default function AboutPage() {
         )}
 
         {/* Certifications Section */}
-        {!error && (loading || aboutData.certifications.length > 0) && (
-          <section className={styles.certificationsSection}>
-            <div className={styles.certificationsSectionInner}>
-              <div className={styles.certificationsContent}>
-                <div></div>
-                <div className={styles.certificationsGrid}>
-                  {loading
-                    ? Array.from({ length: 4 }, (_, i) => (
-                        <div key={i} className={styles.certificationItem}>
-                          <div
-                            className={`${styles.skeletonCircle} ${styles.skeleton}`}
-                          />
-                          <div
-                            className={`${styles.skeletonLine} ${styles.skeletonCertLabel}`}
-                          />
-                        </div>
-                      ))
-                    : aboutData.certifications.map((cert) => (
-                        <div key={cert.id} className={styles.certificationItem}>
-                          <span className="material-symbols-outlined">
-                            {cert.icon}
-                          </span>
-                          <span className={styles.certificationLabel}>
-                            {cert.label}
-                          </span>
-                        </div>
-                      ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
+        {/*{!error && (loading || aboutData.certifications.length > 0) && (*/}
+        {/*  <section className={styles.certificationsSection}>*/}
+        {/*    <div className={styles.certificationsSectionInner}>*/}
+        {/*      <div className={styles.certificationsContent}>*/}
+        {/*        <div></div>*/}
+        {/*        <div className={styles.certificationsGrid}>*/}
+        {/*          {loading*/}
+        {/*            ? Array.from({ length: 4 }, (_, i) => (*/}
+        {/*                <div key={i} className={styles.certificationItem}>*/}
+        {/*                  <div*/}
+        {/*                    className={`${styles.skeletonCircle} ${styles.skeleton}`}*/}
+        {/*                  />*/}
+        {/*                  <div*/}
+        {/*                    className={`${styles.skeletonLine} ${styles.skeletonCertLabel}`}*/}
+        {/*                  />*/}
+        {/*                </div>*/}
+        {/*              ))*/}
+        {/*            : aboutData.certifications.map((cert) => (*/}
+        {/*                <div key={cert.id} className={styles.certificationItem}>*/}
+        {/*                  <span className="material-symbols-outlined">*/}
+        {/*                    {cert.icon}*/}
+        {/*                  </span>*/}
+        {/*                  <span className={styles.certificationLabel}>*/}
+        {/*                    {cert.label}*/}
+        {/*                  </span>*/}
+        {/*                </div>*/}
+        {/*              ))}*/}
+        {/*        </div>*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
+        {/*  </section>*/}
+        {/*)}*/}
 
         {/* Empty state – only if both about & stats returned nothing */}
         {!loading &&

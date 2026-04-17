@@ -311,7 +311,7 @@ $slate-900: #0f172a;
 
   &:hover {
     .projectImage {
-      filter: grayscale(0);
+      //filter: grayscale(0);
     }
 
     .projectOverlay {
@@ -324,7 +324,7 @@ $slate-900: #0f172a;
   width: 100%;
   height: auto;
   object-fit: cover;
-  filter: grayscale(1);
+  //filter: grayscale(1);
   transition: filter 0.7s;
 }
 

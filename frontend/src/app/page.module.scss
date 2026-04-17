@@ -540,8 +540,8 @@ $card-dark: #1f2e1a;
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  opacity: 0.5;
-  filter: grayscale(1);
+  //opacity: 0.5;
+  //filter: grayscale(1);
   transition: all 0.7s;
 
   @media (min-width: 768px) {
@@ -549,8 +549,8 @@ $card-dark: #1f2e1a;
   }
 
   &:hover {
-    filter: grayscale(0);
-    opacity: 1;
+    //filter: grayscale(0);
+    //opacity: 1;
   }
 
   img {
