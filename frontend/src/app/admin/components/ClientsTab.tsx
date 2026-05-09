@@ -107,6 +107,13 @@ export default function ClientsTab() {
   // ═════════════════════════════════════════════════════════
 
   const handleSave = async () => {
+    const invalid = clients.find((c) => !c.name.trim());
+    if (invalid) {
+      setMessage("Company Name is required for all clients.");
+      setTimeout(() => setMessage(""), 4000);
+      return;
+    }
+
     setSaving(true);
     setMessage("");
 

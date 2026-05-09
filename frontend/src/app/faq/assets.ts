@@ -8,7 +8,7 @@ export const FAQ_CATEGORIES = [
     icon: "settings",
   },
   {
-    name: "Products",
+    name: "Materials",
     icon: "layers",
   },
   {
@@ -74,25 +74,25 @@ export const FAQ_ITEMS = [
 
   // Products
   {
-    category: "Products",
+    category: "Materials",
     question: "What is the HG-800 Unitized Series?",
     answer:
       "The HG-800 Unitized Series is our flagship prefabricated panelized façade system designed for rapid installation on high-rise buildings. Each panel is factory-assembled and sealed, achieving a U-Value of 0.85 W/m²K and wind load resistance of up to 5.0 kPa, significantly reducing on-site labor and construction timelines.",
   },
   {
-    category: "Products",
+    category: "Materials",
     question: "Can your curtain wall systems accommodate curved geometries?",
     answer:
       "Yes. Our HG-900 Stick Series and bespoke engineering division handle complex curved, faceted, and double-curved geometries. We use parametric modeling tools to optimize panel segmentation and ensure manufacturing precision for non-planar designs.",
   },
   {
-    category: "Products",
+    category: "Materials",
     question: "What glazing options are available?",
     answer:
       "We offer a full range of glazing options including low-E coated insulated glass units (IGUs), triple-glazed assemblies, laminated safety glass, ceramic-fritted panels, and electrochromic smart glass. Each option is selected based on the project's thermal, acoustic, and aesthetic requirements.",
   },
   {
-    category: "Products",
+    category: "Materials",
     question: "Do you offer sustainable or recyclable façade materials?",
     answer:
       "Sustainability is integral to our product development. We use recyclable aluminium extrusions, low-carbon glass, and bio-based sealants where possible. Many of our systems contribute to LEED, BREEAM, and Estidama credit categories for energy efficiency and material transparency.",

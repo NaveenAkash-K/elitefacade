@@ -1,8 +1,11 @@
-const { createClient } = require('@supabase/supabase-js');
+const { StorageClient } = require('@supabase/storage-js');
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+const storage = new StorageClient(
+  `${process.env.SUPABASE_URL}/storage/v1`,
+  {
+    apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+  }
 );
 
-module.exports = supabase;
+module.exports = storage;

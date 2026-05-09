@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { statsApi, StatItem } from "@/lib/api/statsApi";
-import { productsApi } from "@/lib/api/productsApi";
-import { Product } from "@/lib/api/types";
 import { clientsApi, Client } from "@/lib/api/clientsApi";
+import { servicesApi, ServicePhase } from "@/lib/api/servicesApi";
 
 export function useHome() {
   const [stats, setStats] = useState<StatItem>({
@@ -13,8 +12,8 @@ export function useHome() {
     yearsOfExcellence: "",
     projectsCompleted: "",
   });
-  const [products, setProducts] = useState<Product[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
+  const [phases, setPhases] = useState<ServicePhase[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const isMounted = useRef(true);
@@ -30,27 +29,27 @@ export function useHome() {
     setLoading(true);
     setError(null);
     try {
-      const [statsResult, productsResult, clientsResult] =
+      const [statsResult, clientsResult, servicesResult] =
         await Promise.allSettled([
           statsApi.getAll(),
-          productsApi.getAll({ page: 1, limit: 3 }),
           clientsApi.getAll(),
+          servicesApi.getAll(),
         ]);
 
       if (isMounted.current) {
         if (statsResult.status === "fulfilled") {
           setStats(statsResult.value);
         }
-        if (productsResult.status === "fulfilled") {
-          setProducts(productsResult.value.products);
-        }
         if (clientsResult.status === "fulfilled") {
           setClients(clientsResult.value);
         }
+        if (servicesResult.status === "fulfilled") {
+          setPhases(servicesResult.value.phases);
+        }
         if (
           statsResult.status === "rejected" &&
-          productsResult.status === "rejected" &&
-          clientsResult.status === "rejected"
+          clientsResult.status === "rejected" &&
+          servicesResult.status === "rejected"
         ) {
           const message =
             (
@@ -85,7 +84,7 @@ export function useHome() {
 
   return {
     stats,
-    products,
+    phases,
     clients,
     loading,
     error,

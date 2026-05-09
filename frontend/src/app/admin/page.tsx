@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import styles from "./page.module.scss";
 import { ADMIN_TABS } from "./types";
 import { adminLogin } from "./utils/api";
-import ProductsTab from "./components/ProductsTab";
 import ProjectsTab from "./components/ProjectsTab";
 import ServicesTab from "./components/ServicesTab";
 import FabricationTab from "./components/FabricationTab";
@@ -12,7 +11,7 @@ import ClientsTab from "./components/ClientsTab";
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState("products");
+  const [activeTab, setActiveTab] = useState("projects");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -67,8 +66,6 @@ export default function AdminPage() {
 
   const renderTab = () => {
     switch (activeTab) {
-      case "products":
-        return <ProductsTab />;
       case "projects":
         return <ProjectsTab />;
       case "services":
@@ -78,7 +75,7 @@ export default function AdminPage() {
       case "clients":
         return <ClientsTab />;
       default:
-        return <ProductsTab />;
+        return <ProjectsTab />;
     }
   };
 

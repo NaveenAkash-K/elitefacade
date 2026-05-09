@@ -10,26 +10,11 @@ export interface AdminTab {
 }
 
 export const ADMIN_TABS: AdminTab[] = [
-  { id: "products", label: "Products", icon: "inventory_2" },
   { id: "projects", label: "Projects", icon: "apartment" },
   { id: "services", label: "Services", icon: "engineering" },
   { id: "fabrication", label: "Fabrication", icon: "precision_manufacturing" },
   { id: "clients", label: "Clients", icon: "handshake" },
 ];
-
-// ─── Products ──────────────────────────────────────────────
-export interface ProductItem {
-  id: string;            // local key (crypto.randomUUID)
-  serverId?: string;     // _id from backend — undefined for new items
-  title: string;
-  description: string;
-  badge: string;
-  specs: string[];
-  imageFile: File | null;
-  imagePreview: string;  // blob URL or server imageUrl
-  imageUrl?: string;     // existing server image URL
-  isDirty: boolean;      // true when user edits an existing item
-}
 
 // ─── Projects ──────────────────────────────────────────────
 export interface ProjectItem {

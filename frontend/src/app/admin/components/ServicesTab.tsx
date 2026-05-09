@@ -262,6 +262,7 @@ export default function ServicesTab() {
           title: p.title,
           description: p.description,
           features: p.features.filter((f) => f.trim()),
+          imageUrl: p.imageUrl,
         })),
         steps: steps.map((s) => ({
           title: s.title,

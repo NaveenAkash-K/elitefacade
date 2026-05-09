@@ -51,8 +51,7 @@ $border-light: #ebf3e7;
 }
 
 .logoIcon {
-  //width: 100px;
-  height: 80px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,7 +64,7 @@ $border-light: #ebf3e7;
 
 .logoText {
   color: $text-dark;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.25;
   letter-spacing: -0.025em;

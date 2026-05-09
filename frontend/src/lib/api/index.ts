@@ -4,5 +4,4 @@ export { authApi } from "./authApi";
 export { projectsApi } from "./projectsApi";
 export { fabricationApi } from "./fabricationApi";
 export { clientsApi } from "./clientsApi";
-export { productsApi } from "./productsApi";
 export * from "./types";

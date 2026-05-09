@@ -106,6 +106,13 @@ export default function ProjectsTab() {
 
   // ─── Save ────────────────────────────────────────────────
   const handleSave = async () => {
+    const invalid = projects.find((p) => !p.title.trim());
+    if (invalid) {
+      setMessage("Title is required for all projects.");
+      setTimeout(() => setMessage(""), 4000);
+      return;
+    }
+
     setSaving(true);
     setMessage("");
 

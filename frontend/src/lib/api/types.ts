@@ -72,36 +72,3 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
-// Products
-export interface Product {
-    id: string;
-    title: string;
-    description: string;
-    badge: string | null;
-    category: string;
-    specs: string[];
-    image: string;
-    createdAt?: string;
-    updatedAt?: string;
-}
-
-export interface ProductsResponse {
-    products: Product[];
-    totalPages: number;
-    currentPage: number;
-}
-
-export interface ProductPayload {
-    title: string;
-    description: string;
-    badge?: string | null;
-    category: string;
-    specs: string[];
-    imageFile?: File | null;
-}
-
-export interface ProductFilters {
-    category?: string;
-    page?: number;
-    limit?: number;
-}

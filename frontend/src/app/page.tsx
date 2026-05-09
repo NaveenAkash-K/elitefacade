@@ -20,7 +20,7 @@ function getImageUrl(image: string): string {
 }
 
 export default function Home() {
-  const { stats, products, clients, loading, error, refetch } = useHome();
+  const { stats, phases, clients, loading, error, refetch } = useHome();
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -80,8 +80,8 @@ export default function Home() {
                   <Link href="/projects">
                     <button className={styles.primaryBtn}>View Portfolio</button>
                   </Link>
-                  <Link href="/products">
-                    <button className={styles.secondaryBtn}>Technical Data</button>
+                  <Link href="/services">
+                    <button className={styles.secondaryBtn}>Our Services</button>
                   </Link>
                 </div>
               </div>
@@ -134,54 +134,53 @@ export default function Home() {
                   <h2 className={styles.sectionSubtitle}>Our Expertise</h2>
                   <h3 className={styles.sectionTitle}>Engineered Solutions</h3>
                 </div>
-                <a href="/products" className={styles.exploreLink}>
-                  Explore all products <span className="material-symbols-outlined">arrow_forward</span>
+                <a href="/services" className={styles.exploreLink}>
+                  Explore our services <span className="material-symbols-outlined">arrow_forward</span>
                 </a>
               </div>
 
               <div className={styles.expertiseGrid}>
                 {loading
-                    ? Array.from({ length: 3 }, (_, i) => (
-                        <div key={i} className={styles.expertiseCard}>
-                          <div className={`${styles.expertiseImage} ${styles.skeleton}`} />
+                  ? Array.from({ length: 3 }, (_, i) => (
+                      <div key={i} className={styles.expertiseCard}>
+                        <div className={`${styles.expertiseImage} ${styles.skeleton}`} />
+                        <div className={styles.expertiseContent}>
+                          <div className={`${styles.skeletonLine} ${styles.skeletonTitle}`} />
+                          <div className={`${styles.skeletonLine} ${styles.skeletonDesc}`} />
+                          <div className={`${styles.skeletonLine} ${styles.skeletonTag}`} />
+                        </div>
+                      </div>
+                    ))
+                  : phases.length > 0
+                    ? phases.slice(0, 3).map((phase) => (
+                        <div key={phase.id} className={styles.expertiseCard}>
+                          <div
+                            className={styles.expertiseImage}
+                            style={{ backgroundImage: `url("${phase.imageUrl || ASSETS.curtainWall}")` }}
+                          />
                           <div className={styles.expertiseContent}>
-                            <div className={`${styles.skeletonLine} ${styles.skeletonTitle}`} />
-                            <div className={`${styles.skeletonLine} ${styles.skeletonDesc}`} />
-                            <div className={`${styles.skeletonLine} ${styles.skeletonDesc2}`} />
-                            <div className={`${styles.skeletonLine} ${styles.skeletonTag}`} />
+                            <h4 className={styles.expertiseTitle}>{phase.title}</h4>
+                            <p className={styles.expertiseDescription}>{phase.description}</p>
+                            {phase.features[0] && (
+                              <span className={styles.expertiseTag}>{phase.features[0]}</span>
+                            )}
                           </div>
                         </div>
-                    ))
-                    : products.length > 0
-                        ? products.slice(0, 3).map((product, i) => (
-                            <div key={i} className={styles.expertiseCard}>
-                              <div
-                                  className={styles.expertiseImage}
-                                  style={{
-                                    backgroundImage: `url("${product.image ? getImageUrl(product.image) : ASSETS.curtainWall}")`,
-                                  }}
-                              />
-                              <div className={styles.expertiseContent}>
-                                <h4 className={styles.expertiseTitle}>{product.title}</h4>
-                                <p className={styles.expertiseDescription}>{product.description}</p>
-                                {product && <span className={styles.expertiseTag}>{product.badge}</span>}
-                              </div>
-                            </div>
-                        ))
-                        : [
-                          { image: ASSETS.curtainWall, title: "Curtain Wall Systems", description: "Innovative thermal break technology designed for peak energy efficiency in high-rise constructions.", tag: "Thermal Performance Optimization" },
-                          { image: ASSETS.unitizedFacade, title: "Unitized Façades", description: "Precision-engineered pre-assembled units for rapid onsite installation and superior quality control.", tag: "Rapid Installation Engineering" },
-                          { image: ASSETS.structuralGlass, title: "Structural Glass", description: "Architectural aesthetics meets load-bearing strength with our advanced structural glazing systems.", tag: "Seamless Architectural Aesthetics" },
-                        ].map((item, i) => (
-                            <div key={i} className={styles.expertiseCard}>
-                              <div className={styles.expertiseImage} style={{ backgroundImage: `url("${item.image}")` }} />
-                              <div className={styles.expertiseContent}>
-                                <h4 className={styles.expertiseTitle}>{item.title}</h4>
-                                <p className={styles.expertiseDescription}>{item.description}</p>
-                                <span className={styles.expertiseTag}>{item.tag}</span>
-                              </div>
-                            </div>
-                        ))}
+                      ))
+                    : [
+                        { image: ASSETS.curtainWall, title: "Curtain Wall Systems", description: "Innovative thermal break technology designed for peak energy efficiency in high-rise constructions.", tag: "Thermal Performance Optimization" },
+                        { image: ASSETS.unitizedFacade, title: "Unitized Façades", description: "Precision-engineered pre-assembled units for rapid onsite installation and superior quality control.", tag: "Rapid Installation Engineering" },
+                        { image: ASSETS.structuralGlass, title: "Structural Glass", description: "Architectural aesthetics meets load-bearing strength with our advanced structural glazing systems.", tag: "Seamless Architectural Aesthetics" },
+                      ].map((item, i) => (
+                        <div key={i} className={styles.expertiseCard}>
+                          <div className={styles.expertiseImage} style={{ backgroundImage: `url("${item.image}")` }} />
+                          <div className={styles.expertiseContent}>
+                            <h4 className={styles.expertiseTitle}>{item.title}</h4>
+                            <p className={styles.expertiseDescription}>{item.description}</p>
+                            <span className={styles.expertiseTag}>{item.tag}</span>
+                          </div>
+                        </div>
+                      ))}
               </div>
             </div>
           </section>

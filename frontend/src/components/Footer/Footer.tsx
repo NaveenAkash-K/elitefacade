@@ -59,7 +59,6 @@ const Footer: React.FC = () => {
             <li><Link href="/services">Facade Engineering</Link></li>
             <li><Link href="/services">Curtain Wall Systems</Link></li>
             <li><Link href="/services">Structural Glazing</Link></li>
-            <li><Link href="/products">Our Products</Link></li>
             <li><Link href="/fabrication">Fabrication & QA</Link></li>
           </ul>
         </div>
