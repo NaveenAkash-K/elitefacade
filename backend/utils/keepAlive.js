@@ -1,9 +1,9 @@
 const cron = require('node-cron');
-const storage = require('../config/supabase');
+const supabase = require('../config/supabase');
 
 const pingSupabase = async () => {
   try {
-    await storage.listBuckets();
+    await supabase.storage.listBuckets();
     console.log('[keep-alive] Supabase pinged successfully');
   } catch (err) {
     console.error('[keep-alive] Supabase ping failed:', err.message);
