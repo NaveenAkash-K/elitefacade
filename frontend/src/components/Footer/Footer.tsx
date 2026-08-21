@@ -31,10 +31,10 @@ const Footer: React.FC = () => {
             <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="LinkedIn">
               <span className="material-symbols-outlined">work</span>
             </a>
-            <a href="mailto:info@elitefacade.com" className={styles.socialLink} aria-label="Email">
+            <a href="mailto:info@elitefacade.in" className={styles.socialLink} aria-label="Email">
               <span className="material-symbols-outlined">mail</span>
             </a>
-            <a href="tel:+910000000000" className={styles.socialLink} aria-label="Phone">
+            <a href="tel:+919790535060" className={styles.socialLink} aria-label="Phone">
               <span className="material-symbols-outlined">call</span>
             </a>
           </div>
@@ -81,11 +81,11 @@ const Footer: React.FC = () => {
             </div>
             <div className={styles.addressItem}>
               <span className="material-symbols-outlined">mail</span>
-              <a href="mailto:info@elitefacade.com">info@elitefacade.com</a>
+              <a href="mailto:info@elitefacade.in">info@elitefacade.in</a>
             </div>
             <div className={styles.addressItem}>
               <span className="material-symbols-outlined">call</span>
-              <a href="tel:+910000000000">+91 00000 00000</a>
+              <a href="tel:+919790535060">+91 97905 35060</a>
             </div>
           </div>
         </div>

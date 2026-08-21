@@ -48,11 +48,12 @@ $footer-border: rgba(255, 255, 255, 0.08);
 }
 
 .footerLogoText {
+  font-family: var(--font-brand), Georgia, serif;
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 700;
   color: $footer-heading;
   text-transform: uppercase;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.08em;
 }
 
 .footerBrandDescription {

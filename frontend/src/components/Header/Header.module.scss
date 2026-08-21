@@ -14,33 +14,34 @@ $border-light: #ebf3e7;
   backdrop-filter: blur(12px);
 }
 
-.companyName {
-  display: none;
-  color: $text-dark;
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-}
-
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.5rem;
+
+  @media (min-width: 1281px) {
+    gap: 2rem;
+  }
+
+  @media (max-width: 1100px) {
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.625rem 1rem;
+    gap: 0.75rem;
+  }
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.875rem;
   text-decoration: none;
   color: $primary;
   flex-shrink: 0;
@@ -48,30 +49,101 @@ $border-light: #ebf3e7;
   &:hover {
     opacity: 0.9;
   }
+
+  @media (max-width: 480px) {
+    gap: 0.625rem;
+  }
 }
 
 .logoIcon {
-  //width: 100px;
-  height: 80px;
+  height: 7.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: $primary;
 
-  span {
-    font-size: 1.5rem;
+  img {
+    height: 100%;
+    width: auto;
+  }
+
+  @media (max-width: 1280px) {
+    height: 6.5rem;
+  }
+
+  @media (max-width: 768px) {
+    height: 5.5rem;
+  }
+
+  @media (max-width: 480px) {
+    height: 4.25rem;
   }
 }
 
 .logoText {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-brand), Georgia, serif;
   color: $text-dark;
-  font-size: 1.25rem;
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.logoTextTop {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+
+  @media (max-width: 1280px) {
+    font-size: 1.3125rem;
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 1.1875rem;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.125rem;
+  }
 
   @media (max-width: 480px) {
-    display: none;
+    font-size: 0.9375rem;
+  }
+}
+
+.logoTextBottom {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: $primary;
+
+  @media (max-width: 1280px) {
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 0.875rem;
+    letter-spacing: 0.22em;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
   }
 }
 
@@ -80,7 +152,15 @@ $border-light: #ebf3e7;
   flex: 1;
   justify-content: center;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.25rem;
+
+  @media (min-width: 1281px) {
+    gap: 2.25rem;
+  }
+
+  @media (max-width: 1100px) {
+    gap: 1rem;
+  }
 
   @media (max-width: 1024px) {
     display: none;
@@ -113,6 +193,7 @@ $border-light: #ebf3e7;
       border-radius: 1px;
     }
   }
+
 }
 
 .currentPage {
@@ -147,7 +228,7 @@ $border-light: #ebf3e7;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-width: 150px;
+  min-width: 120px;
   height: 2.75rem;
   padding: 0 1.25rem;
   background-color: $primary;
@@ -158,6 +239,7 @@ $border-light: #ebf3e7;
   box-shadow: 0 10px 15px -3px rgba($primary, 0.2);
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
   transition: background-color 0.2s, transform 0.2s;
 
   span:first-child {
@@ -167,6 +249,15 @@ $border-light: #ebf3e7;
   &:hover {
     background-color: rgba($primary, 0.9);
     transform: translateY(-1px);
+  }
+
+  @media (min-width: 1281px) {
+    min-width: 150px;
+  }
+
+  @media (max-width: 1100px) {
+    min-width: auto;
+    padding: 0 0.875rem;
   }
 
   @media (max-width: 768px) {

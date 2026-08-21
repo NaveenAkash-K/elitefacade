@@ -98,16 +98,15 @@ export default function ContactPage() {
               <span className="material-symbols-outlined">call</span>
             </div>
             <h3>Phone</h3>
-            <p>+971 4 123 4567</p>
-            <p>+971 4 765 4321</p>
+            <p>+91 97905 35060</p>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.infoIcon}>
               <span className="material-symbols-outlined">mail</span>
             </div>
             <h3>Email</h3>
-            <p>info@elitefacade.com</p>
-            <p>projects@elitefacade.com</p>
+            <p>info@elitefacade.in</p>
+            <p>projects@elitefacade.in</p>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.infoIcon}>
@@ -182,7 +181,7 @@ export default function ContactPage() {
                     type="tel"
                     id="phone"
                     name="phone"
-                    placeholder="+971 50 123 4567"
+                    placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={handleChange}
                   />

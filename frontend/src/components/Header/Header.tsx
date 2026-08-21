@@ -36,13 +36,13 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <span className={styles.logoIcon}>
-              <Image src={logo} alt={""} width={100}/>
+            <Image src={logo} alt={""} width={200} priority />
           </span>
-          <span className={styles.logoText}>Elite Facade Solutions</span>
+          <span className={styles.logoText}>
+            <span className={styles.logoTextTop}>Elite Facade</span>
+            <span className={styles.logoTextBottom}>Solutions</span>
+          </span>
         </Link>
-        <div className={styles.companyName}>
-          Elite Facade Solutions
-        </div>
 
         {/* Desktop Navigation */}
         <nav className={styles.desktopNav}>
