@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
             <div className={styles.addressItem}>
               <span className="material-symbols-outlined">location_on</span>
               <p>
-                Elite Solutions,<br />
+                Elite Facade Solutions,<br />
                 140/2B, Anna Industrial Estate,<br />
                 Mettukuppam Road,<br />
                 Porur Garden Phase II,<br />

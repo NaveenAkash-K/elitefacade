@@ -91,7 +91,7 @@ export default function ContactPage() {
               <span className="material-symbols-outlined">location_on</span>
             </div>
             <h3>Our Office</h3>
-            <p>Elite Solutions, 140/2B, Anna Industrial Estate, Mettukuppam Road, Porur Garden Phase II, Odamangar, Vanagaram, Chennai - 600095</p>
+            <p>Elite Facade Solutions, 140/2B, Anna Industrial Estate, Mettukuppam Road, Porur Garden Phase II, Odamangar, Vanagaram, Chennai - 600095</p>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.infoIcon}>
@@ -106,7 +106,7 @@ export default function ContactPage() {
             </div>
             <h3>Email</h3>
             <p>info@elitefacade.in</p>
-            <p>projects@elitefacade.in</p>
+            <p>design@elitefacade.in</p>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.infoIcon}>
